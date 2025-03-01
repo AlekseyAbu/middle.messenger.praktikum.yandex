@@ -1,0 +1,53 @@
+@import "../../shared/style/index.scss";
+
+.setting {
+    display: flex;
+
+    &__block-back {
+        width: 64px;
+        height: 100vh;
+        background: #FBFBFB;
+        border-right: 1px solid #EAEAEA;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .button {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__content {
+        width: 100%;
+        @extend %flex-column;
+        justify-content: center;
+        align-items: center;
+
+        &__about {
+            @extend %flex-column;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        &__info {
+            @extend %flex-column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        &__actions {
+            @extend %flex-column;
+            align-items: center;
+            margin-top: 50px;
+        }
+    }
+}
+
+.setting-name {
+    margin-top: 10px;
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    color: #1E1E1E;
+}

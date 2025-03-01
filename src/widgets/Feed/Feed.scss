@@ -1,0 +1,36 @@
+@import "../../shared/style/index.scss";
+
+.feed {
+    @extend %flex-column;
+    padding: 0 20px;
+    width: 100%;
+
+    &__header {
+        width: 100%;
+        padding: 10px 0;
+        @extend %flex-row;
+        align-items: center;
+        border-bottom: 1px solid #EAEAEA;
+
+        &__btn {
+            margin-left: auto;
+            margin-right: 10px;
+            background-image: url("src/shared/assets/icon/kebab.png");
+            width: 3px;
+            height: 15px;
+        }
+
+        &__name {
+            display: block;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 13px;
+            color: #1E1E1E;
+            margin-left: 10px;
+        }
+    }
+
+    &__content {
+        height: calc(100vh - 110px);
+    }
+}

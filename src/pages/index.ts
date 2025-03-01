@@ -1,0 +1,7 @@
+export {LoginPage} from './LoginPage/LoginPage.ts'
+export {AuthPage} from './AuthPage/AuthPage.ts'
+export {Main} from './Main/Main.ts'
+export {SettingPage} from './SettingPage/SettingPage.ts'
+export {NotFoundPage} from './NotFoundPage/NotFoundPage.ts'
+export {ServerErrorPage} from './ServerErrorPage/ServerErrorPage.ts'
+export {List} from './List/List.ts'

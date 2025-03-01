@@ -1,0 +1,37 @@
+.message-image {
+    width: 100%;
+    margin-bottom: 10px;
+
+    &__content {
+        height: 210px;
+        width: 320px;
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+
+        &_in {
+            margin-left: 0;
+        }
+
+        &_out{
+            margin-right: 0;
+        }
+
+        &__time {
+            padding: 2px 7px;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-family: Inter;
+            font-weight: 500;
+            font-size: 9px;
+            line-height: 9px;
+            text-align: right;
+            background: #52525280;
+            color: #ffffff;
+            z-index: 1;
+            border-radius: 30px;
+        }
+    }
+
+}

@@ -1,0 +1,17 @@
+@import "../../../shared/style/index.scss";
+
+.form-input {
+    display: grid;
+    grid-template-columns: 30px auto 30px;
+    gap: 10px;
+    border-top: 1px solid #EAEAEA;
+    padding: 10px 0;
+
+    &__input {
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        background: #EFEFEF;
+        border-radius: 30px;
+    }
+}

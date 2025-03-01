@@ -1,0 +1,23 @@
+.avatar {
+    border-radius: 50%;
+    overflow: hidden;
+
+    &__image {
+        object-fit: cover;
+    }
+}
+
+.size {
+    &__s {
+        width: 34px;
+        height: 34px;
+    }
+    &__m {
+        width: 47px;
+        height: 47px;
+    }
+    &__l {
+        width: 130px;
+        height: 130px;
+    }
+}

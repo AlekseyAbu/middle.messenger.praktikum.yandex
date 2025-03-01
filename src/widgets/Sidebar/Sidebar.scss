@@ -1,0 +1,25 @@
+@import "../../shared/style/index.scss";
+
+.sidebar {
+    background: #FBFBFB;
+    width: 310px;
+    height: 100vh;
+    padding: 0 10px;
+    @extend %flex-column;
+
+    &__btn {
+        display: inline-flex;
+        align-items: center;
+        margin: 20px 10px 0 auto;
+
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 12px;
+        color: #999999;
+
+
+        &__icon {
+            margin-left: 5px;
+        }
+    }
+}
