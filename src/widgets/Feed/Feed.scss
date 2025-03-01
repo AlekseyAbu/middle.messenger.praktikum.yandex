@@ -1,4 +1,4 @@
-@import "../../shared/style/index.scss";
+@use "../../shared/style/index.scss";
 
 .feed {
     @extend %flex-column;

@@ -4,7 +4,7 @@ import * as Widgets from '../widgets';
 import * as Pages from '../pages';
 
 
-const pages = {
+const pages: {[key: string]: any} = {
     'login': [ Pages.LoginPage ],
     'auth': [ Pages.AuthPage ],
     'main': [Pages.Main ],
