@@ -25,7 +25,6 @@ function navigate(page: string) {
     const container = document.getElementById('app')!;
 
     const temlpatingFunction = Handlebars.compile(source);
-    console.log('html', temlpatingFunction(context))
     container.innerHTML = temlpatingFunction(context);
 }
 

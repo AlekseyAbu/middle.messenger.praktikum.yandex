@@ -1,11 +1,10 @@
-@use "../../shared/style/index.scss";
-
 .sidebar {
     background: #FBFBFB;
     width: 310px;
     height: 100vh;
     padding: 0 10px;
-    @extend %flex-column;
+    display: flex;
+    flex-direction: column;
 
     &__btn {
         display: inline-flex;

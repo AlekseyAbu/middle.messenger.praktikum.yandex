@@ -1,15 +1,14 @@
-@use "../../shared/style/index.scss";
-
 .feed {
-    @extend %flex-column;
+    display: flex;
+    flex-direction: column;
     padding: 0 20px;
     width: 100%;
 
     &__header {
         width: 100%;
-        padding: 10px 0;
-        @extend %flex-row;
-        align-items: center;
+        padding: 10px 0;display: flex;
+
+                align-items: center;
         border-bottom: 1px solid #EAEAEA;
 
         &__btn {
@@ -31,6 +30,7 @@
     }
 
     &__content {
-        height: calc(100vh - 110px);
+        margin-top: 10px;
+        height: calc(100vh - 120px);
     }
 }

@@ -1,5 +1,3 @@
-@use "../../shared/style/index.scss";
-
 .setting {
     display: flex;
 
@@ -19,24 +17,28 @@
 
     &__content {
         width: 100%;
-        @extend %flex-column;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
 
         &__about {
-            @extend %flex-column;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             margin-top: 60px;
         }
 
         &__info {
-            @extend %flex-column;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             margin-top: 50px;
         }
 
         &__actions {
-            @extend %flex-column;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             margin-top: 50px;
         }
