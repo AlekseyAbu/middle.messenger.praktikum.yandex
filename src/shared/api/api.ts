@@ -19,7 +19,7 @@ type Options = {
   signal?: AbortSignal,
 };
 
-function queryStringify(data) {
+function queryStringify(data: Record<string, unknown>) {
   if (typeof data !== 'object') {
     throw new Error('Data must be object');
   }
@@ -32,7 +32,7 @@ function queryStringify(data) {
 type OptionsWithoutMethod = Omit<Options, 'method'>;
 
 // eslint-disable-next-line no-unused-vars
-class HTTPTransport {
+export default class HTTPTransport {
   get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     return this.request(url, { ...options, method: METHOD.GET });
   }

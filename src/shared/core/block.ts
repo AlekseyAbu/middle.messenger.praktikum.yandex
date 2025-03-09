@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import Handlebars from 'handlebars';
-import EventBus from './eventBus';
+import EventBus from './eventBus.ts';
 
 type Options = {
   className?: string,
@@ -70,9 +70,7 @@ export default class Block {
 
     if (this._options?.attr) {
       Object.entries(this._options.attr).forEach(([attrName, attrValue]) => {
-        if ('setAttribute' in this._element) {
-          this._element.setAttribute(attrName, attrValue);
-        }
+        this._element?.setAttribute(attrName, attrValue as string);
       });
     }
   }
@@ -175,11 +173,11 @@ export default class Block {
       if (Array.isArray(component)) {
         component.forEach((child) => {
           const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-          stub?.replaceWith(child.getContent());
+          stub?.replaceWith(child.getContent()!);
         });
       } else {
         const stub = fragment.content.querySelector(`[data-id="${component._id}"]`);
-        stub?.replaceWith(component.getContent());
+        stub?.replaceWith(component.getContent()!);
       }
     });
 
