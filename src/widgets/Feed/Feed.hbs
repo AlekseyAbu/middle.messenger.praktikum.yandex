@@ -1,17 +1,14 @@
-<div class="feed">
   <div class="feed__header">
-    {{> Avatar url="https://lastfm.freetls.fastly.net/i/u/ar0/708e7517998748bac8a19f4a42635124.png" size="s" name=""}}
+    {{{Avatar}}}
     <span class="feed__header__name">{{name}}</span>
     <button class="feed__header__btn">
     </button>
   </div>
 
   <ul class="feed__content">
-    {{> MessageSystem content="19 июня" }}
-    {{> MessageText way="out" content="Привет! Как дела?" status="" time="10:29"}}
-    {{> MessageImage way="out" url="https://get.wallhere.com/photo/cat-nose-whiskers-lie-kitten-floor-fluffy-mammal-vertebrate-cat-like-mammal-small-to-medium-sized-cats-carnivoran-domestic-short-haired-cat-692406.jpg" time="10:29"}}
-    {{> MessageText way="in" content="Привет, все хорошо!" status="" time="10:29"}}
+    {{#each feedList}}
+      {{{ this }}}
+    {{/each}}
   </ul>
 
-  {{> Form }}
-</div>
+  {{{Form}}}

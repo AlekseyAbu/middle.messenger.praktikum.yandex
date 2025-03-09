@@ -1,0 +1,15 @@
+  {{#if date}}
+    <span class="system__text">{{content}}</span>
+
+  {{else}}
+    <div class="message__content message__content__{{type}} message__content_{{way}}">
+      {{#if url}}
+          <img class="message-image__content" src="{{url}}" alt="image">
+      {{else}}
+
+        {{content}}
+      {{/if}}
+
+      <span class="message__content__time message__content__time_{{way}}">{{time}}</span>
+    </div>
+  {{/if}}
