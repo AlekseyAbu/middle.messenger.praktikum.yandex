@@ -1,5 +1,5 @@
 import './shared/style/index.scss';
-import './shared/style/reset.css';
+import './shared/style/reset.scss';
 import navigate from './app';
 
 document.addEventListener('DOMContentLoaded', () => navigate('list'));
