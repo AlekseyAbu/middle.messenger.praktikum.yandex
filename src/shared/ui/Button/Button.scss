@@ -1,0 +1,49 @@
+.button {
+    width: 280px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    border-radius: 8px;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 300ms;
+
+    &_primary {
+        background: #3369F3;
+        color: #ffffff;
+
+        &:hover {
+            opacity: .6;
+        }
+    }
+
+    &_outline {
+        background: #ffffff;
+        color: #3369F3;
+
+        &:hover {
+            background: #eeeded;
+        }
+    }
+}
+
+.arrow {
+    width: 28px;
+    height: 28px;
+    background-color: #3369F3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

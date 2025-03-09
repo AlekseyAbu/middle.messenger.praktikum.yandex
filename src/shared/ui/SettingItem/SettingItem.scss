@@ -1,0 +1,21 @@
+.settings-item {
+    width: 510px;
+    padding: 10px 0;
+    border-bottom: 1px solid #EAEAEA;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+
+    &__name {
+        color: #1E1E1E;
+    }
+
+    &__input {
+        color: #999999;
+        text-align: right;
+    }
+}

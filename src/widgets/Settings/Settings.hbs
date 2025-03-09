@@ -1,0 +1,25 @@
+<div class="setting">
+  <div class="setting__block-back">
+    {{> Button icon="arrow-line.svg" view="arrow" }}
+  </div>
+
+  <form class="setting__content">
+    <div class="setting__content__about">
+      {{> Avatar url="https://lastfm.freetls.fastly.net/i/u/ar0/708e7517998748bac8a19f4a42635124.png" size="l" name=""}}
+      <span class="setting-name">Иван</span>
+    </div>
+
+    <div class="setting__content__info">
+      {{> SettingItem name="Почта" value="pochta@yandex.ru" type="email"}}
+      {{> SettingItem name="Логин" value="ivanivanov" type="login"}}
+      {{> SettingItem name="Имя" value="Иван" type="first_name"}}
+      {{> SettingItem name="Фамилия" value="Иванов" type="second_name"}}
+      {{> SettingItem name="Имя в чате" value="Иван" type="display_name"}}
+      {{> SettingItem name="Телефон" value="+7 (909) 967 30 30" type="phone"}}
+    </div>
+
+    <div class="setting__content__actions">
+      {{> Button type="primary" label="Сохранить"}}
+    </div>
+  </form>
+</div>

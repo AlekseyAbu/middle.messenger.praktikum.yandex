@@ -1,0 +1,26 @@
+.search {
+    display: flex;
+    align-items: center;
+    width: 280px;
+    padding: 8px;
+    background: #EFEFEF;
+    border-radius: 5px;
+    margin: 20px auto 15px;
+
+    &__icon {
+        margin-right: 5px;
+    }
+
+    &___input {
+        font-family: Inter;
+        color: #1E1E1E;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 12px;
+
+        &:placeholder {
+            color: #999999;
+        }
+
+    }
+}

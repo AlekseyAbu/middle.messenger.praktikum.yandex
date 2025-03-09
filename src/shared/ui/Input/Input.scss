@@ -1,0 +1,39 @@
+.wrapper-input {
+    margin-bottom: 32px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+.input {
+    position: relative;
+    margin-bottom: 30px;
+}
+.input__element {
+    font-size: 16px;
+    padding: 7px;
+    display: block;
+    width: 280px;
+    border: none;
+    border-bottom: 1px solid #3369F3;
+}
+.input__element:focus {
+    outline: none;
+}
+.input__label {
+    color: #999;
+    font-size: 13px;
+    position: absolute;
+    pointer-events: none;
+    top: 12px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+.input__element:focus + .input__label {
+    top: -10px;
+    font-size: 9px;
+    color: #999999;
+}
+.input__element:valid + label {
+    color: #3369F3;
+}
