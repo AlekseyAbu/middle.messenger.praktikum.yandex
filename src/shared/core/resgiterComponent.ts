@@ -6,7 +6,7 @@ export function registerComponent(name: string, Component: typeof Block) {
     throw `The ${name} component is already registered!`;
   }
 
-  Handlebars.registerHelper(name, function (this: unknown, { hash, data, fn }: HelperOptions) {
+  Handlebars.registerHelper(name, (this: unknown, { hash, data, fn }: HelperOptions) => {
     const component = new Component(hash);
     const dataAttribute = `data-id="${component.id}"`;
 

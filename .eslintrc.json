@@ -14,7 +14,8 @@
     "no-throw-literal": "off",
     "no-param-reassign": "off",
     "new-cap": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "no-console": "off"
   },
   "env" :  {
     "browser" :  1
