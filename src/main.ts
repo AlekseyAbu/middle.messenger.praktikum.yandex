@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => navigate('list'));
 document.addEventListener('click', (e) => {
   const target = e.target as HTMLElement;
   if (target) {
-    const page = target.getAttribute('data-page');
+    const page = target.getAttribute('page');
 
     if (page) {
       navigate(page);

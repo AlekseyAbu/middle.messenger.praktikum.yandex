@@ -1,0 +1,26 @@
+.setting {
+    display: flex;
+
+    &__block-back {
+        width: 64px;
+        height: 100vh;
+        background: #FBFBFB;
+        border-right: 1px solid #EAEAEA;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .button {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.setting-name {
+    margin-top: 10px;
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    color: #1E1E1E;
+}

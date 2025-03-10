@@ -6,7 +6,7 @@ export default class ServerErrorPage extends Block {
   constructor() {
     super('div', {
       Setting: new Settings({ name: 'Иван' }),
-    });
+    }, { className: 'setting' });
   }
 
   render(): string {

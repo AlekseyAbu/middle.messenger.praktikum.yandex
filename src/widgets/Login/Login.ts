@@ -21,15 +21,18 @@ export default class Login extends Block {
         phone: '',
         passwordTwo: '',
       },
-      formStateAuth: {
-        login: '',
-        password: '',
+      errorForm: false,
+      events: {
+        submit: (e: Event) => {
+          e.preventDefault();
+          console.log(this.props.formState);
+        },
       },
       InputEmail: new InputField({
         label: 'Почта',
         name: 'email',
-        onChange: (event) => {
-          const { value } = event.target;
+        onChange: (event: InputEvent) => {
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.email(value)) {
@@ -40,7 +43,7 @@ export default class Login extends Block {
             error = '';
           }
 
-          this.children.InputEmail.setProps({
+          (this.children.InputEmail as Block).setProps({
             error,
           });
 
@@ -56,7 +59,7 @@ export default class Login extends Block {
         label: 'Логин',
         name: 'login',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.login(value)) {
@@ -67,7 +70,7 @@ export default class Login extends Block {
             error = '';
           }
 
-          this.children.InputLogin.setProps({
+          (this.children.InputLogin as Block).setProps({
             error,
           });
 
@@ -83,14 +86,14 @@ export default class Login extends Block {
         label: 'Имя',
         name: 'first_name',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.first_name(value)) {
             error = 'Первая буква должна быть заглавной';
           }
 
-          this.children.InputFirstName.setProps({
+          (this.children.InputFirstName as Block).setProps({
             error,
           });
 
@@ -110,7 +113,7 @@ export default class Login extends Block {
         label: 'Фамилия',
         name: 'second_name',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.second_name(value)) {
@@ -121,7 +124,7 @@ export default class Login extends Block {
             error = '';
           }
 
-          this.children.InputSecondName.setProps({
+          (this.children.InputSecondName as Block).setProps({
             error,
           });
 
@@ -137,7 +140,7 @@ export default class Login extends Block {
         label: 'Телефон',
         name: 'phone',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.phone(value)) {
@@ -148,7 +151,7 @@ export default class Login extends Block {
             error = '';
           }
 
-          this.children.InputPhone.setProps({
+          (this.children.InputPhone as Block).setProps({
             error,
           });
 
@@ -164,7 +167,7 @@ export default class Login extends Block {
         label: 'Пароль',
         name: 'password',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.password(value)) {
@@ -175,7 +178,7 @@ export default class Login extends Block {
             error = '';
           }
 
-          this.children.InputPassword.setProps({
+          (this.children.InputPassword as Block).setProps({
             error,
           });
 
@@ -191,7 +194,7 @@ export default class Login extends Block {
         label: 'Пароль (ещё раз)',
         name: 'password',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.password(value)) {
@@ -202,7 +205,7 @@ export default class Login extends Block {
             error = '';
           }
 
-          this.children.InputPasswordTwo.setProps({
+          (this.children.InputPasswordTwo as Block).setProps({
             error,
           });
 
@@ -221,6 +224,7 @@ export default class Login extends Block {
         class: 'button_auth',
         onClick: () => {
           console.log(this.props.formState);
+          this.setProps({ errorForm: validator.validateForm(this.props.formState) });
         },
       }),
       ButtonNotAccount: new Button({ label: 'Зарегистрироваться', type: 'outline' }),

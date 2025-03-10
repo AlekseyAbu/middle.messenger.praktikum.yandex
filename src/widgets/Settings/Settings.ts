@@ -10,8 +10,9 @@ interface ISettings {
 const validator = new Validator();
 export default class Settings extends Block {
   constructor(props: ISettings) {
-    super('div', {
+    super('form', {
       ...props,
+      errorForm: false,
       formState: {
         login: '',
         email: '',
@@ -23,6 +24,11 @@ export default class Settings extends Block {
       ButtonSave: new Button({
         type: 'primary',
         label: 'Сохранить',
+        onClick: () => {
+          console.log(this.props.formState);
+          console.log('hey', validator.validateForm(this.props.formState));
+          this.setProps({ errorForm: validator.validateForm(this.props.formState) });
+        },
       }),
       ButtonBack: new Button({
         icon: 'arrow-line.svg',
@@ -37,7 +43,7 @@ export default class Settings extends Block {
         value: 'pochta@yandex.ru',
         name: 'email',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.email(value)) {
@@ -48,7 +54,7 @@ export default class Settings extends Block {
             error = '';
           }
 
-          this.children.SettingEmail.setProps({
+          (this.children.SettingEmail as Block).setProps({
             error,
           });
 
@@ -65,7 +71,7 @@ export default class Settings extends Block {
         value: 'ivanivanov',
         name: 'login',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.login(value)) {
@@ -76,7 +82,7 @@ export default class Settings extends Block {
             error = '';
           }
 
-          this.children.SettingLogin.setProps({
+          (this.children.SettingLogin as Block).setProps({
             error,
           });
 
@@ -93,7 +99,7 @@ export default class Settings extends Block {
         value: 'Иван',
         name: 'first_name',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.first_name(value)) {
@@ -104,7 +110,7 @@ export default class Settings extends Block {
             error = '';
           }
 
-          this.children.SettingFirstName.setProps({
+          (this.children.SettingFirstName as Block).setProps({
             error,
           });
 
@@ -121,7 +127,7 @@ export default class Settings extends Block {
         value: 'Иванов',
         name: 'second_name',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.second_name(value)) {
@@ -132,7 +138,7 @@ export default class Settings extends Block {
             error = '';
           }
 
-          this.children.SettingSecondName.setProps({
+          (this.children.SettingSecondName as Block).setProps({
             error,
           });
 
@@ -149,7 +155,7 @@ export default class Settings extends Block {
         value: 'Иван',
         name: 'display_name',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.second_name(value)) {
@@ -160,7 +166,7 @@ export default class Settings extends Block {
             error = '';
           }
 
-          this.children.SettingDisplayName.setProps({
+          (this.children.SettingDisplayName as Block).setProps({
             error,
           });
 
@@ -177,7 +183,7 @@ export default class Settings extends Block {
         value: '+7 (909) 967 30 30',
         name: 'phone',
         onChange: (event) => {
-          const { value } = event.target;
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.phone(value)) {
@@ -188,7 +194,7 @@ export default class Settings extends Block {
             error = '';
           }
 
-          this.children.SettingPhone.setProps({
+          (this.children.SettingPhone as Block).setProps({
             error,
           });
 
@@ -201,7 +207,7 @@ export default class Settings extends Block {
         },
       }),
 
-    }, { className: 'setting' });
+    }, { className: 'setting__content' });
   }
 
   render(): string {

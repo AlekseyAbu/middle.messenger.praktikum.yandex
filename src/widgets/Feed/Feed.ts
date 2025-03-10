@@ -6,7 +6,7 @@ import { MessageType } from '@/shared/type';
 interface IFeed {
   name?: string;
   feed: { [key: number]: MessageType[] };
-  isActiveFeed: string,
+  isActiveFeed: number,
 }
 export default class Feed extends Block {
   constructor(props: IFeed) {
@@ -24,7 +24,7 @@ export default class Feed extends Block {
 
       }),
 
-      feedList: props.feed[props.isActiveFeed].map((propsFeed) => new Message({
+      feedList: props.feed[props.isActiveFeed].map((propsFeed: MessageType) => new Message({
         ...propsFeed,
       })),
 

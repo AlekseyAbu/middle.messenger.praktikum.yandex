@@ -27,4 +27,9 @@ export interface SystemMessage {
   date: string;
 }
 
+export interface IValidationForm {
+  hasError: boolean
+  name: string
+}
+
 export type MessageType = TextMessage | ImageMessage | SystemMessage;

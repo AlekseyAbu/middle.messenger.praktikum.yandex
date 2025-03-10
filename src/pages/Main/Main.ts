@@ -13,7 +13,7 @@ export default class LoginPage extends Block {
       Sidebar: new Sidebar({
         chats: mockChats,
       }),
-      Feed: new Feed({ name: 'Вадим', feed: mockFeed, isActiveFeed: '1' }),
+      Feed: new Feed({ name: 'Вадим', feed: mockFeed, isActiveFeed: 1 }),
     }, { className: 'wrapper' });
   }
 

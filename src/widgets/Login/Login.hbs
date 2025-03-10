@@ -1,4 +1,3 @@
-<form class="form">
 
   {{{InputEmail}}}
   {{{InputLogin}}}
@@ -12,4 +11,9 @@
     {{{ButtonSighIn}}}
     {{{ButtonNotAccount}}}
   </div>
-</form>
+
+  {{#if errorForm}}
+    <span class="form__error">
+    Неверно заполнена форма
+  </span>
+  {{/if}}

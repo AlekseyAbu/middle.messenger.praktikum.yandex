@@ -1,5 +1,5 @@
 import Block from '@/shared/core/block.ts';
-import template from './Login.hbs?raw';
+import template from './Auth.hbs?raw';
 import { Button, InputField } from '@/shared';
 import Validator from '@/shared/utils/validate.ts';
 
@@ -8,22 +8,26 @@ interface IInterface {
 }
 
 const validator = new Validator();
-export default class Login extends Block {
+export default class Auth extends Block {
   constructor(props: IInterface) {
     super('form', {
       ...props,
+      errorForm: false,
       formState: {
         login: '',
         password: '',
       },
       events: {
-        submit: () => console.log('hey'),
+        submit: (e: Event) => {
+          e.preventDefault();
+          console.log(this.props.formState, 'submit');
+        },
       },
       InputLogin: new InputField({
         label: 'Логин',
         name: 'login',
-        onChange: (event) => {
-          const { value } = event.target;
+        onChange: (event: InputEvent) => {
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.login(value)) {
@@ -34,7 +38,7 @@ export default class Login extends Block {
             error = '';
           }
 
-          this.children.InputLogin.setProps({
+          (this.children.InputLogin as Block).setProps({
             error,
           });
 
@@ -49,8 +53,8 @@ export default class Login extends Block {
       InputPassword: new InputField({
         label: 'Пароль',
         name: 'password',
-        onChange: (event) => {
-          const { value } = event.target;
+        onChange: (event: InputEvent) => {
+          const { value } = event.target as HTMLInputElement;
           let error = '';
 
           if (!validator.password(value)) {
@@ -61,7 +65,7 @@ export default class Login extends Block {
             error = '';
           }
 
-          this.children.InputPassword.setProps({
+          (this.children.InputPassword as Block).setProps({
             error,
           });
 
@@ -78,8 +82,10 @@ export default class Login extends Block {
         label: 'Авторизоваться',
         type: 'primary',
         class: 'button_auth',
+        typeBtn: 'submit',
         onClick: () => {
           console.log(this.props.formState);
+          this.setProps({ errorForm: validator.validateForm(this.props.formState) });
         },
       }),
       ButtonNotAccount: new Button({ label: 'Нет аккаунта?', type: 'outline' }),

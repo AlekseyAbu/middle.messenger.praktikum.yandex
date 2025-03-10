@@ -43,4 +43,43 @@ export default class Validator {
   message(message: string): boolean {
     return message.trim() !== '';
   }
+
+  _validateField(name:string, value:string) {
+    switch (name) {
+      case 'email':
+        return this.email(value);
+
+      case 'login':
+        return this.login(value);
+
+      case 'first_name':
+      case 'second_name':
+        return this.first_name(value);
+
+      case 'phone':
+        return this.phone(value);
+
+      case 'password':
+        return this.password(value);
+
+      case 'password_repeat':
+        return this.password(value);
+
+      case 'password_old':
+        return this.password(value);
+      default:
+        return false;
+    }
+  }
+
+  validateForm(formState: Record<string, string>): boolean {
+    let error = false;
+    Object.keys(formState).forEach((name) => {
+      if (!this._validateField(name, formState[name])) {
+        error = true;
+      }
+    });
+
+    return error;
+  }
 }

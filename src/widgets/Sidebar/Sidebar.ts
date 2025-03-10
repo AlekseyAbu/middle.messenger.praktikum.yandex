@@ -33,16 +33,18 @@ export default class Login extends Block {
     const { activeCatIndex } = this.props;
     const { chatList } = this.children;
 
-    chatList.forEach((chat, index) => {
-      if (index === activeCatIndex) {
-        chat.setProps({ active: true });
-        return;
-      }
+    if (!(chatList instanceof Block)) {
+      chatList.forEach((chat: Block, index: number) => {
+        if (index === activeCatIndex) {
+          chat.setProps({ active: true });
+          return;
+        }
 
-      if (chat.props.active) {
-        chat.setProps({ active: false });
-      }
-    });
+        if (chat.props.active) {
+          chat.setProps({ active: false });
+        }
+      });
+    }
 
     return template;
   }

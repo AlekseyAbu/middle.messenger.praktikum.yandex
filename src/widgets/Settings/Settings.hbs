@@ -1,23 +1,23 @@
-  <div class="setting__block-back">
-    {{{ButtonBack}}}
+  <div class="setting__content__about">
+    {{{Avatar}}}
+    <span class="setting-name">{{name}}</span>
   </div>
 
-  <form class="setting__content">
-    <div class="setting__content__about">
-      {{{Avatar}}}
-      <span class="setting-name">{{name}}</span>
-    </div>
+  <div class="setting__content__info">
+    {{{SettingEmail}}}
+    {{{SettingLogin}}}
+    {{{SettingFirstName}}}
+    {{{SettingSecondName}}}
+    {{{SettingDisplayName}}}
+    {{{SettingPhone}}}
+  </div>
 
-    <div class="setting__content__info">
-      {{{SettingEmail}}}
-      {{{SettingLogin}}}
-      {{{SettingFirstName}}}
-      {{{SettingSecondName}}}
-      {{{SettingDisplayName}}}
-      {{{SettingPhone}}}
-    </div>
+  <div class="setting__content__actions">
+    {{{ButtonSave}}}
+  </div>
 
-    <div class="setting__content__actions">
-      {{{ButtonSave}}}
-    </div>
-  </form>
+  {{#if errorForm}}
+    <span class="setting__content__error">
+    Неверно заполнена форма
+  </span>
+  {{/if}}

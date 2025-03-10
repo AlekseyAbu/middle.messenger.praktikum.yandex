@@ -8,6 +8,7 @@ interface IButton {
   view?: string,
   label?: string,
   icon?: string,
+  typeBtn?: string,
   onClick?: () => void,
 }
 
@@ -20,6 +21,9 @@ export default class Button extends Block {
       },
     }, {
       className: `button button_${props.type} ${props.class} ${props.view}`,
+      attr: {
+        type: props.typeBtn ? props.typeBtn : '',
+      },
     });
   }
 
