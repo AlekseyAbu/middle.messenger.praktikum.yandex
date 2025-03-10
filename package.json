@@ -10,8 +10,8 @@
     "start": "vite --port 3000",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint:ts": "eslint \"**/*.ts\"",
-    "lint:ts:fix": "eslint \"**/*.ts\" --fix",
+    "eslint:ts": "eslint \"**/*.{ts,js}\" && tsc --noEmit",
+    "eslint:fix": "eslint \"**/*.{ts,js}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix"
   },

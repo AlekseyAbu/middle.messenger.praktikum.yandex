@@ -1,12 +1,12 @@
 import Handlebars, { HelperOptions } from 'handlebars';
-import Block from './Block.ts';
+import Block from './block.ts';
 
 export function registerComponent(name: string, Component: typeof Block) {
   if (name in Handlebars.helpers) {
     throw `The ${name} component is already registered!`;
   }
 
-  Handlebars.registerHelper(name, (this: unknown, { hash, data, fn }: HelperOptions) => {
+  Handlebars.registerHelper(name, function (this: unknown, { hash, data, fn }: HelperOptions) {
     const component = new Component(hash);
     const dataAttribute = `data-id="${component.id}"`;
 

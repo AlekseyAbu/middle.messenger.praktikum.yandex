@@ -1,5 +1,4 @@
 import Block from '@/shared/core/block.ts';
-import template from './ChatItem.hbs?raw';
 
 interface IChatItem {
   url?: string,

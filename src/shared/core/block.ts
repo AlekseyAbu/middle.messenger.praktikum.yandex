@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import Handlebars from 'handlebars';
-import EventBus from './eventBus.ts';
+import EventBus from './EventBus.ts';
 
 type Options = {
   className?: string,
@@ -29,6 +29,10 @@ export default class Block {
   public children: Children;
 
   public props: Record<string, any>;
+
+  get id(): string {
+    return this._id;
+  }
 
   private eventBus: () => EventBus<string, Record<string, any[]>>;
 
@@ -112,7 +116,7 @@ export default class Block {
     this.componentDidMount();
   }
 
-  public componentDidMount(oldProps?: Record<string, any>): void {}
+  public componentDidMount(): void {}
 
   public dispatchComponentDidMount(): void {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
