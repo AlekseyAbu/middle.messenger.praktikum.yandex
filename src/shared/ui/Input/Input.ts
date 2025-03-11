@@ -15,9 +15,11 @@ export default class Input extends Block {
         change: props.onChange,
       },
     }, {
-      className: `input__element ${props.class}`,
+      className: `input__element${props.class ? ` ${props.class}` : ''}`,
       attr: {
-        placeholder: '',
+        placeholder: props.placeholder ? props.placeholder : '',
+        name: props.name ? props.name : '',
+        value: props.value ? props.value : '',
       },
     });
   }
