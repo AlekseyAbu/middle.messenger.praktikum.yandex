@@ -26,6 +26,10 @@
         margin-top: auto;
         display: flex;
         flex-direction: column;
+
+        button:first-child {
+            margin-bottom: 10px;
+        }
     }
 
     &__error {

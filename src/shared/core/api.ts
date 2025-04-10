@@ -19,6 +19,8 @@ type Options = {
   signal?: AbortSignal,
 };
 
+// Lipomcity123
+
 function queryStringify(data: Record<string, unknown>) {
   if (typeof data !== 'object') {
     throw new Error('Data must be object');
@@ -33,32 +35,42 @@ type OptionsWithoutMethod = Omit<Options, 'method'>;
 
 // eslint-disable-next-line no-unused-vars
 export default class HTTPTransport {
-  get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.GET });
+  private apiUrl: string = '';
+
+  constructor(apiPath: string) {
+    this.apiUrl = `https://ya-praktikum.tech/api/v2${apiPath}`;
   }
 
-  post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.POST });
+  get(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
+    return this.request(`${this.apiUrl}${url}`, { ...options, method: METHOD.GET });
   }
 
-  put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.PUT });
+  post(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
+    return this.request(
+      `${this.apiUrl}${url}`,
+      { ...options, method: METHOD.POST, headers: { 'Content-Type': 'application/json' } },
+    );
   }
 
-  delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.DELETE });
+  put(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
+    return this.request(`${this.apiUrl}${url}`, { ...options, method: METHOD.PUT });
+  }
+
+  delete(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
+    return this.request(`${this.apiUrl}${url}`, { ...options, method: METHOD.DELETE });
   }
 
   request(
     url: string,
     options: Options = { method: METHOD.GET },
     timeout = 5000,
-  ): Promise<XMLHttpRequest> {
+  ): Promise<Response> {
     const { method, data, headers = {} } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHOD.GET;
+      xhr.withCredentials = true;
 
       xhr.open(
         method,
@@ -71,19 +83,30 @@ export default class HTTPTransport {
         xhr.setRequestHeader(key, headers[key]);
       });
 
-      xhr.onload = () => {
-        resolve(xhr);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status < 400) {
+            resolve(xhr.response);
+          } else {
+            reject(xhr.response);
+          }
+        }
       };
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
+      const handleError = (event: ProgressEvent) => {
+        // eslint-disable-next-line prefer-promise-reject-errors
+        reject(`Network error: ${event.type}`);
+      };
+
+      xhr.onabort = handleError;
+      xhr.onerror = handleError;
       xhr.timeout = timeout;
-      xhr.ontimeout = reject;
+      xhr.ontimeout = handleError;
 
       if (isGet || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       }
     });
   }

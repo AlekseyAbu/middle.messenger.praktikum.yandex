@@ -12,9 +12,19 @@
     {{{SettingPhone}}}
   </div>
 
-  <div class="setting__content__actions">
-    {{{ButtonSave}}}
-  </div>
+  {{#if isChange}}
+    <div class="setting__content__actions">
+      {{{ButtonSave}}}
+    </div>
+  {{/if}}
+
+  {{#if isDefault}}
+    <div class="setting__content__actions">
+      {{{ButtonChange}}}
+      {{{ButtonChangePassword}}}
+      {{{ButtonExit}}}
+    </div>
+  {{/if}}
 
   {{#if errorForm}}
     <span class="setting__content__error">

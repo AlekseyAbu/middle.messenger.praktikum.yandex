@@ -2,13 +2,16 @@ import Block from '@/shared/core/block.ts';
 import template from './Login.hbs?raw';
 import { Button, InputField } from '@/shared';
 import Validator from '@/shared/utils/validate.ts';
+import { connect } from '@/shared/store/connect';
+import * as authServices from '../../shared/services/auth';
+import { ROUTER } from '@/shared/constants/constants.ts';
 
 interface IInterface {
   title?: string;
 }
 
 const validator = new Validator();
-export default class Login extends Block {
+class Login extends Block {
   constructor(props: IInterface) {
     super('form', {
       ...props,
@@ -223,15 +226,38 @@ export default class Login extends Block {
         type: 'primary',
         class: 'button_auth',
         onClick: () => {
-          console.log(this.props.formState);
           this.setProps({ errorForm: validator.validateForm(this.props.formState) });
+          console.log(this.props.formState, 'his.props.formState');
+          const data = this.props.formState;
+          delete data.passwordTwo;
+          console.log(data, 'data');
+          authServices.register(data);
+          authServices.checkLoginUser();
         },
       }),
-      ButtonNotAccount: new Button({ label: 'Зарегистрироваться', type: 'outline' }),
+      ButtonNotAccount: new Button({
+        label: 'Войти',
+        type: 'outline',
+        onClick: () => {
+          window.router.go(ROUTER.auth);
+        },
+      }),
     }, { className: 'form' });
   }
 
+  isAuth() {
+    // authServices.checkLoginUser();
+  }
+
   render(): string {
+    this.isAuth();
     return template;
   }
 }
+
+const mapStateToProps = (state) => ({
+  isLoading: state.isLoading,
+  loginError: state.loginError,
+});
+
+export default connect(mapStateToProps)(Login);

@@ -124,6 +124,7 @@ export default class Block {
 
   private _componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): void {
     const response = this.componentDidUpdate(oldProps, newProps);
+
     if (!response) {
       return;
     }
@@ -145,7 +146,7 @@ export default class Block {
   private _addEvents(): void {
     const { events = {} } = this.props as { events: Record<string, () => void> };
     Object.keys(events).forEach((eventName: string) => {
-      console.log(this._element, eventName, events[eventName], '_addEvents');
+      // console.log(this._element, eventName, events[eventName], '_addEvents');
       this._element?.addEventListener(eventName, events[eventName]);
     });
   }

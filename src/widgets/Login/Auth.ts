@@ -2,13 +2,17 @@ import Block from '@/shared/core/block.ts';
 import template from './Auth.hbs?raw';
 import { Button, InputField } from '@/shared';
 import Validator from '@/shared/utils/validate.ts';
+import * as authServices from '../../shared/services/auth';
+import { connect } from '@/shared/store/connect.ts';
+import { ROUTER } from '@/shared/constants/constants.ts';
+import { checkLoginUser } from '../../shared/services/auth';
 
 interface IInterface {
   title?: string;
 }
 
 const validator = new Validator();
-export default class Auth extends Block {
+class Auth extends Block {
   constructor(props: IInterface) {
     super('form', {
       ...props,
@@ -20,7 +24,7 @@ export default class Auth extends Block {
       events: {
         submit: (e: Event) => {
           e.preventDefault();
-          console.log(this.props.formState, 'submit');
+          // console.log(this.props.formState, 'submit');
         },
       },
       InputLogin: new InputField({
@@ -84,17 +88,39 @@ export default class Auth extends Block {
         class: 'button_auth',
         typeBtn: 'submit',
         onClick: () => {
-          console.log(this.props.formState);
+          // console.log(this.props.formState);
           this.setProps({ errorForm: validator.validateForm(this.props.formState) });
+          authServices.login(this.props.formState);
+          authServices.checkLoginUser();
         },
       }),
-      ButtonNotAccount: new Button({ label: 'Нет аккаунта?', type: 'outline' }),
+      ButtonNotAccount: new Button({
+        label: 'Нет аккаунта?',
+        type: 'outline',
+        onClick: (event) => {
+          event.preventDefault();
+          window.router.go(ROUTER.login);
+        },
+      }),
     }, {
       className: 'form',
     });
   }
 
+  isAuth() {
+    console.log('isAuth');
+    // authServices.checkLoginUser();
+  }
+
   render(): string {
+    this.isAuth();
     return template;
   }
 }
+
+const mapStateToProps = (state) => ({
+  isLoading: state.isLoading,
+  loginError: state.loginError,
+});
+
+export default connect(mapStateToProps)(Auth);

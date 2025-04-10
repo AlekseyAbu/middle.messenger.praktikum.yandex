@@ -10,3 +10,5 @@ export { MessageText } from './ui/MessageText/MessageText.ts';
 export { Message } from './ui/Message/index.ts';
 export { Form } from './ui/Form/index.ts';
 export { SettingItem } from './ui/SettingItem/index.ts';
+export { Modal } from './ui/Modal/index.ts';
+export { ToolTip } from './ui/ToolTip/index.ts';

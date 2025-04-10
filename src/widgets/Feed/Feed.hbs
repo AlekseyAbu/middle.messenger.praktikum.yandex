@@ -1,8 +1,9 @@
   <div class="feed__header">
     {{{Avatar}}}
     <span class="feed__header__name">{{name}}</span>
-    <button class="feed__header__btn">
-    </button>
+<!--    <button class="feed__header__btn">-->
+<!--    </button>-->
+    {{{Button}}}
   </div>
 
   <ul class="feed__content">
@@ -12,3 +13,11 @@
   </ul>
 
   {{{Form}}}
+
+  {{#if openModal}}
+    {{{Modal}}}
+  {{/if}}
+
+{{#if openToolTip}}
+    {{{ToolTip}}}
+  {{/if}}

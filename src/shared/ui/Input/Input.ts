@@ -6,6 +6,7 @@ interface IInputProps {
   class?: string,
   name?: string,
   value?: string,
+  disabled?: boolean,
 }
 export default class Input extends Block {
   constructor(props: IInputProps) {
@@ -22,5 +23,17 @@ export default class Input extends Block {
         value: props.value ? props.value : '',
       },
     });
+  }
+
+  componentDidUpdate(oldProps, newProps) {
+    if (oldProps.value !== newProps.value) {
+      this.setProps({ value: newProps.value });
+    }
+
+    return true;
+  }
+
+  render(): string {
+    return '';
   }
 }

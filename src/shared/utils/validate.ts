@@ -62,7 +62,7 @@ export default class Validator {
       case 'password':
         return this.password(value);
 
-      case 'password_repeat':
+      case 'passwordTwo':
         return this.password(value);
 
       case 'password_old':
@@ -76,6 +76,7 @@ export default class Validator {
     let error = false;
     Object.keys(formState).forEach((name) => {
       if (!this._validateField(name, formState[name])) {
+        console.log(name, formState[name], 'validateForm');
         error = true;
       }
     });

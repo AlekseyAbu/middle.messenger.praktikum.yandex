@@ -11,3 +11,9 @@
     Неверно заполнена форма
   </span>
 {{/if}}
+
+{{#if loginError}}
+  <span class="form__error">
+    {{loginError}}
+  </span>
+{{/if}}

@@ -2,17 +2,21 @@ import Block from '@/shared/core/block.ts';
 import template from './Settings.hbs?raw';
 import { Avatar, Button, SettingItem } from '@/shared';
 import Validator from '@/shared/utils/validate.ts';
+import * as authServices from '../../shared/services/auth';
+import { connect } from '@/shared/store/connect.ts';
 
 interface ISettings {
   name: string
 }
 
 const validator = new Validator();
-export default class Settings extends Block {
+class Settings extends Block {
   constructor(props: ISettings) {
     super('form', {
       ...props,
       errorForm: false,
+      isDefault: true,
+      isChange: false,
       formState: {
         login: '',
         email: '',
@@ -25,9 +29,34 @@ export default class Settings extends Block {
         type: 'primary',
         label: 'Сохранить',
         onClick: () => {
-          console.log(this.props.formState);
-          console.log('hey', validator.validateForm(this.props.formState));
           this.setProps({ errorForm: validator.validateForm(this.props.formState) });
+        },
+      }),
+      ButtonChange: new Button({
+        type: 'outline',
+        label: 'Изменить данные',
+        onClick: (event) => {
+          event.preventDefault();
+          this.setProps({ isChange: true });
+          authServices.changeUser(this.props.formState);
+          console.log(this.props.formState);
+        },
+      }),
+      ButtonChangePassword: new Button({
+        type: 'outline',
+        label: 'Изменить пароль',
+        onClick: () => {
+          console.log(this.props.formState);
+        },
+      }),
+      ButtonExit: new Button({
+        type: 'outline',
+        class: 'red',
+        label: 'Выйти',
+        onClick: (event) => {
+          event.preventDefault();
+          console.log('hey');
+          authServices.exit();
         },
       }),
       ButtonBack: new Button({
@@ -40,7 +69,7 @@ export default class Settings extends Block {
       }),
       SettingEmail: new SettingItem({
         nameSetting: 'Почта',
-        value: 'pochta@yandex.ru',
+        value: 'user.email',
         name: 'email',
         onChange: (event) => {
           const { value } = event.target as HTMLInputElement;
@@ -210,7 +239,51 @@ export default class Settings extends Block {
     }, { className: 'setting__content' });
   }
 
+  test() {
+    const { SettingSecondName } = this.children;
+    console.log('test', SettingSecondName);
+    if (SettingSecondName instanceof Block) {
+      SettingSecondName.setProps({ value: 'trimtrim' });
+    }
+  }
+
   render(): string {
+    const {
+      SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone,
+    } = this.children;
+
+    authServices.checkLoginUser();
+
+    if (SettingEmail instanceof Block) {
+      SettingEmail.setProps({ disabled: this.props.isChange });
+    }
+    //
+    if (SettingLogin instanceof Block) {
+      SettingLogin.setProps({ value: JSON.parse(this.props.user).second_name });
+    }
+    //
+    // if (SettingFirstName instanceof Block) {
+    //   SettingFirstName.setProps({ value: this.user.second_name });
+    // }
+    //
+    // if (SettingSecondName instanceof Block) {
+    //   SettingSecondName.setProps({ value: this.user.second_name });
+    // }
+    //
+    // if (SettingDisplayName instanceof Block) {
+    //   SettingDisplayName.setProps({ value: this.user.second_name });
+    // }
+    //
+    // if (SettingPhone instanceof Block) {
+    //   SettingPhone.setProps({ value: this.user.second_name });
+    // }
+
     return template;
   }
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(Settings);
