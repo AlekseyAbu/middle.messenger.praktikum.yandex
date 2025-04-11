@@ -259,7 +259,9 @@ class Settings extends Block {
     }
     //
     if (SettingLogin instanceof Block) {
-      SettingLogin.setProps({ value: JSON.parse(this.props.user).second_name });
+      if (JSON.parse(this.props.user)?.second_name) {
+        SettingLogin.setProps({ value: JSON.parse(this.props.user).second_name });
+      }
     }
     //
     // if (SettingFirstName instanceof Block) {
