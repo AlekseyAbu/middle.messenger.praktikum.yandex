@@ -1,6 +1,4 @@
-// @ts-ignore
 import './shared/style/index.scss';
-// @ts-ignore
 import './shared/style/reset.scss';
 import Router from '@/shared/core/Router.ts';
 import { ROUTER } from '@/shared/constants/constants.ts';

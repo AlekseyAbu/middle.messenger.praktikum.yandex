@@ -21,7 +21,7 @@ export default class Input extends Block {
         placeholder: props.placeholder ? props.placeholder : '',
         name: props.name ? props.name : '',
         value: props.value ? props.value : '',
-        // @ts-ignore
+        // @ts-expect-error
         disabled: props.disabled ? props.disabled : false,
       },
     });
@@ -40,9 +40,9 @@ export default class Input extends Block {
   }
 
   private setOptionsAttr(key: string, value: any): void {
-    // @ts-ignore
+    // @ts-expect-error
     this._options.attr = {
-      // @ts-ignore
+      // @ts-expect-error
       ...this._options.attr,
       [key]: value,
     };

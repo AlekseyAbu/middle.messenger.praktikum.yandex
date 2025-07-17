@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error
 import EventBus from '../core/eventBus';
 
 export enum StoreEvents {

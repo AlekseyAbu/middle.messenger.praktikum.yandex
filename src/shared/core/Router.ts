@@ -31,14 +31,14 @@ class Router {
   }
 
   use(pathname: string, block: any): Router { // Добавлены типы и возврат this
-    // @ts-ignore
+    // @ts-expect-error
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;
   }
 
   start(): void {
-    // @ts-ignore
+    // @ts-expect-error
     window.onpopstate = ((event: PopStateEvent) => {
       this._onRoute(window.location.pathname); // Исправлено получение pathname
     });
@@ -61,18 +61,18 @@ class Router {
   }
 
   go(pathname: string): void {
-    // @ts-ignore
+    // @ts-expect-error
     this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
 
   back(): void {
-    // @ts-ignore
+    // @ts-expect-error
     this.history.back();
   }
 
   forward(): void {
-    // @ts-ignore
+    // @ts-expect-error
     this.history.forward();
   }
 

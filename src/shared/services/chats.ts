@@ -4,7 +4,7 @@ const chatApi = new ChatApi();
 
 export const getChats = async () => {
   await chatApi.listChats().then((response) => {
-    // @ts-ignore
+    // @ts-expect-error
     (window as any).store.set({ chats: JSON.parse(response) });
   });
 };
@@ -74,9 +74,9 @@ export const getTokenChat = async (id: number) => {
   (window as any).store.set({ isLoading: true });
   try {
     const response = await chatApi.pingTokenChats(id);
-    // @ts-ignore
+    // @ts-expect-error
     (window as any).store.set({ token_chat: JSON.parse(response).token });
-    // @ts-ignore
+    // @ts-expect-error
     return JSON.parse(response);
   } catch (responsError) {
     console.error(responsError);

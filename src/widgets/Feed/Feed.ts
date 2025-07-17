@@ -47,7 +47,7 @@ class Feed extends Block {
           event.preventDefault();
           console.log(event, this.socket, 'event');
           console.log(this.props.inputValue, 'this.props.inputValue');
-          // @ts-ignore
+          // @ts-expect-error
           this.socket.send({
             content: this.props.inputValue,
             type: 'message',
