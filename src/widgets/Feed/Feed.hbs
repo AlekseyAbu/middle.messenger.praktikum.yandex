@@ -1,6 +1,8 @@
   <div class="feed__header">
-    {{{Avatar}}}
-    <span class="feed__header__name">{{name}}</span>
+    {{#if choiceChat}}
+      {{{Avatar}}}
+      <span class="feed__header__name">{{name}}</span>
+    {{/if}}
 <!--    <button class="feed__header__btn">-->
 <!--    </button>-->
     {{{Button}}}
@@ -12,7 +14,9 @@
     {{/each}}
   </ul>
 
-  {{{Form}}}
+  {{#if choiceChat}}
+    {{{Form}}}
+  {{/if}}
 
   {{#if openModal}}
     {{{Modal}}}

@@ -22,6 +22,7 @@ export default class Form extends Block {
       ButtonSend: new Button({
         icon: 'arrow-line.svg',
         view: 'arrow',
+        onClick: props.onSubmit,
       }),
       ButtonMenu: new Button({
         icon: 'clip.svg',

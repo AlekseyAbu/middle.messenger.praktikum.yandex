@@ -53,11 +53,12 @@ export default class Block {
     this._options = options;
 
     this._registerEvents(eventBus);
-    eventBus.emit(Block.EVENTS.INIT);
+
+    this.init();
   }
 
   private _registerEvents(eventBus: EventBus<string, Record<string, any[]>>): void {
-    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
@@ -72,16 +73,16 @@ export default class Block {
       this._element.classList.add(...classes);
     }
 
-    if (this._options?.attr) {
-      Object.entries(this._options.attr).forEach(([attrName, attrValue]) => {
-        this._element?.setAttribute(attrName, attrValue as string);
-      });
-    }
+    this._updateAttributes();
   }
 
-  private init(): void {
+  private _init(): void {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+  }
+
+  public init(): void {
+    this.eventBus().emit(Block.EVENTS.INIT);
   }
 
   private _getChildrenAndProps(propsAndChildren: Record<string, any>): { children: Children; props: Record<string, any> } {
@@ -200,6 +201,11 @@ export default class Block {
       this._element?.replaceChildren(block);
     }
 
+    if (this._options?.attr?.value) {
+      this._element?.setAttribute('value', this.props.value);
+    }
+
+    this._updateAttributes();
     this._addEvents();
   }
 
@@ -236,6 +242,22 @@ export default class Block {
     return document.createElement(tagName);
   }
 
+  private _updateAttributes(): void {
+    if (!this._element || !this._options.attr) return;
+
+    Object.entries(this._options.attr).forEach(([attrName, attrValue]) => {
+      if (typeof attrValue === 'boolean') {
+        if (attrValue) {
+          this._element!.setAttribute(attrName, '');
+        } else {
+          this._element!.removeAttribute(attrName);
+        }
+      } else {
+        // this._element!.setAttribute(attrName, attrValue as string);
+      }
+    });
+  }
+
   public show(): void {
     const content = this.getContent();
     if (content) {
@@ -250,3 +272,21 @@ export default class Block {
     }
   }
 }
+
+// LoginAbu
+// LoginAbu123;
+
+// {
+//   "id": 4356,
+//   "first_name": "Aleksey",
+//   "second_name": "A",
+//   "display_name": "Heyhey121",
+//   "login": "LoginAbu",
+//   "avatar": null,
+//   "role": "admin"
+// }
+
+// Alesey123123
+// AlekseyGfhjkm123
+
+// "id":4395}

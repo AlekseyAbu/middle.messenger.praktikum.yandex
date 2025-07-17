@@ -6,12 +6,18 @@
     grid-template-columns: 47px auto 25px;
     border-top: 1px solid #EAEAEA;
     column-gap: 10px;
+    cursor: pointer;
+    transition: 300ms;
 
     &__avatar {
         width: 47px;
         height: 47px;
         border-radius: 50%;
         object-fit: cover;
+    }
+
+    &:hover {
+        opacity: .5;
     }
 }
 

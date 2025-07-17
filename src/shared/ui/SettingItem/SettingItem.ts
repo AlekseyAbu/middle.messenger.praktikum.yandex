@@ -27,14 +27,22 @@ export default class SettingItem extends Block {
     });
   }
 
-  componentDidUpdate(oldProps, newProps) {
-    console.log(oldProps.value !== newProps.value, newProps.value);
+  public componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
     if (oldProps.value !== newProps.value) {
-      console.log(this.children.Input, 'this.children.Input');
-      this.children.Input.setProps({ value: newProps.value });
+      if (this.children?.Input) {
+        this.children.Input.setProps({ value: newProps.value, disabled: newProps.disabled });
+      }
+
+      return true;
     }
 
-    return true;
+    if (oldProps.disabled !== newProps.disabled) {
+      this.children.Input.setProps({ value: newProps.value, disabled: newProps.disabled });
+
+      return true;
+    }
+
+    return false;
   }
 
   render(): string {

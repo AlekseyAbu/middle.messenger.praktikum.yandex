@@ -53,11 +53,18 @@ export default class HTTPTransport {
   }
 
   put(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
-    return this.request(`${this.apiUrl}${url}`, { ...options, method: METHOD.PUT });
+    return this.request(`${this.apiUrl}${url}`, {
+      ...options,
+      method: METHOD.PUT,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   delete(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
-    return this.request(`${this.apiUrl}${url}`, { ...options, method: METHOD.DELETE });
+    return this.request(
+      `${this.apiUrl}${url}`,
+      { ...options, method: METHOD.DELETE, headers: { 'Content-Type': 'application/json' } },
+    );
   }
 
   request(

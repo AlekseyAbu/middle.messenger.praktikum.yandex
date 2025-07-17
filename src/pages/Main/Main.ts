@@ -4,6 +4,7 @@ import { Feed, Sidebar } from '@/widgets';
 import mockChats from './mockChats.ts';
 import mockFeed from './mockFeed.ts';
 import { connect } from '@/shared/store/connect.ts';
+import * as chatServices from '@/shared/services/chats.ts';
 
 class LoginPage extends Block {
   constructor() {
@@ -14,21 +15,25 @@ class LoginPage extends Block {
       Sidebar: new Sidebar({
         chats: [],
       }),
-      Feed: new Feed({ name: 'Вадим', feed: [], isActiveFeed: null }),
+      Feed: new Feed({ name: '', feed: [], isActiveFeed: null }),
     }, { className: 'wrapper' });
   }
 
-  render(): string {
-    const {
-      Feed, Sidebar,
-    } = this.children;
+  public init(): void {
+    super.init();
+    chatServices.getChats();
+  }
 
-    if (Sidebar instanceof Block) {
-      Sidebar.setProps({
-        chats: mockChats,
+  public componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): boolean {
+    if (this.props.chats) {
+      this.children.Sidebar.setProps({
+        chats: this.props.chats,
       });
     }
+    return true;
+  }
 
+  render(): string {
     return template;
   }
 }

@@ -3,6 +3,7 @@
     <span class="setting-name">{{name}}</span>
   </div>
 
+  {{#unless isPassword}}
   <div class="setting__content__info">
     {{{SettingEmail}}}
     {{{SettingLogin}}}
@@ -11,6 +12,15 @@
     {{{SettingDisplayName}}}
     {{{SettingPhone}}}
   </div>
+  {{/unless}}
+
+  {{#if isPassword}}
+    <div class="setting__content__info">
+      {{{SettingOldPassword}}}
+      {{{SettingNewPassword}}}
+      {{{SettingNewReplayPassword}}}
+    </div>
+  {{/if}}
 
   {{#if isChange}}
     <div class="setting__content__actions">

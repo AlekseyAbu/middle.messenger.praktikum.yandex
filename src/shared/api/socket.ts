@@ -1,4 +1,4 @@
-import { EventBus } from '../core/EventBus.ts';
+import EventBus from '../core/EventBus.ts';
 
 export enum WebSocketEvents {
   Close = 'close',
@@ -48,6 +48,18 @@ export class WebSocketTransport extends EventBus {
       throw new Error('Сокет-соединение не установлено');
     }
     this.socket.send(JSON.stringify(data));
+  }
+
+  public getOldMessages(offset: number = 0) {
+    if (!this.socket) {
+      throw new Error('Сокет-соединение не установлено');
+    }
+    this.socket.send(
+      JSON.stringify({
+        content: offset.toString(),
+        type: 'get old',
+      }),
+    );
   }
 
   private addEventListeners(socket: WebSocket) {

@@ -11,6 +11,7 @@ window.store = new Store({
   loginError: null,
   chats: null,
   chat_id: null,
+  choice_chat: null,
 });
 
 store.on(StoreEvents.Updated, (prevState, newState) => {

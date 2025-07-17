@@ -61,22 +61,16 @@ export default class ChatItem extends Block {
     });
   }
 
-  componentDidUpdate(oldProps, newProps) {
-    console.log(isEqual(oldProps, newProps), newProps, 'isEqual');
-    if (isEqual(oldProps, newProps)) {
+  componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
+    if (!isEqual(oldProps, newProps)) {
       this.props.setProps({ ...newProps });
+      return true;
     }
 
-    return true;
+    return false;
   }
 
   render(): string {
-    const {
-      avatar, created_by, id, last_message, title, unread_count, active,
-    } = this.props;
-
-    console.log(this.props, avatar, created_by, id, last_message, title, unread_count, active, 'props chat item');
-
     return `
       <li class="chat-item {{#if active}}active{{/if}}">
           <img class="chat-item__avatar" src="{{avatar}}" alt="{{title}}"/>

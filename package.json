@@ -7,7 +7,7 @@
     "node": "20.12.2"
   },
   "scripts": {
-    "start": "vite --port 3000",
+    "start": "vite --port 3001",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "eslint:ts": "eslint \"**/*.{ts,js}\" && tsc --noEmit",
