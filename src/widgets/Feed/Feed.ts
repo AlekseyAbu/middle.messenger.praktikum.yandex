@@ -93,6 +93,9 @@ class Feed extends Block {
                 title: str,
               });
               break;
+
+            default:
+              break;
           }
         },
       }),

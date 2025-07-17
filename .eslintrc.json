@@ -15,7 +15,10 @@
     "no-param-reassign": "off",
     "new-cap": "off",
     "no-use-before-define": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "no-shadow": "off",
+    "no-constructor-return": "off",
+    "camelcase": "off"
   },
   "env" :  {
     "browser" :  1

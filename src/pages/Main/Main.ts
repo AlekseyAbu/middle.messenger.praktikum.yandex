@@ -2,7 +2,6 @@ import Block from '@/shared/core/block.ts';
 import template from './Main.hbs?raw';
 import { Feed, Sidebar } from '@/widgets';
 import mockChats from './mockChats.ts';
-import mockFeed from './mockFeed.ts';
 import { connect } from '@/shared/store/connect.ts';
 import * as chatServices from '@/shared/services/chats.ts';
 
@@ -24,7 +23,7 @@ class LoginPage extends Block {
     chatServices.getChats();
   }
 
-  public componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): boolean {
+  public componentDidUpdate(): boolean {
     if (this.props.chats) {
       this.children.Sidebar.setProps({
         chats: this.props.chats,

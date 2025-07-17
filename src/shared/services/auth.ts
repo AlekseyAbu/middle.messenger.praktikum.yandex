@@ -12,7 +12,7 @@ export const login = async (model) => {
     console.log(response, 'login in service');
     window.router.go(ROUTER.chats);
   } catch (error) {
-    console.error(responsError);
+    console.error(error);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -28,7 +28,7 @@ export const register = async (model) => {
     console.log(responseUsers, 'responseUsers');
     // window.router.go(ROUTER.chats);
   } catch (error) {
-    console.error(responsError);
+    console.error(error);
   } finally {
     window.store.set({ isLoading: false });
   }
