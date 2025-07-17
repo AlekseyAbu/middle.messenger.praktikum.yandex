@@ -14,11 +14,8 @@ export const createChat = async (data) => {
     const response = await chatApi.createChat(data);
     console.log(response, 'getChats');
     await getChats();
-    // window.router.go(ROUTER.chats);
-    // window.store.set({ user });
   } catch (responsError) {
-    // const error = await responsError.json();
-    // window.store.set({ loginError: error.reason });
+    console.error(responsError);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -28,12 +25,9 @@ export const getUsersInChat = async (id) => {
   window.store.set({ isLoading: true });
   try {
     const response = await chatApi.userInChat(id);
-    // console.log(response, 'getUsersInChat');
-    // window.router.go(ROUTER.chats);
-    // window.store.set({ user });
+    console.log(response, 'getUsersInChat');
   } catch (responsError) {
-    // const error = await responsError.json();
-    // window.store.set({ loginError: error.reason });
+    console.error(responsError);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -43,12 +37,8 @@ export const putUsersInChat = async (data) => {
   window.store.set({ isLoading: true });
   try {
     const response = await chatApi.addUserInChat(data);
-    console.log(response, 'putUsersInChat');
-    // window.router.go(ROUTER.chats);
-    // window.store.set({ user });
   } catch (responsError) {
-    // const error = await responsError.json();
-    // window.store.set({ loginError: error.reason });
+    console.error(responsError);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -59,11 +49,8 @@ export const deleteUsersInChat = async (data) => {
   try {
     const response = await chatApi.deleteUserInChat(data);
     console.log(response, 'deleteUsersInChat');
-    // window.router.go(ROUTER.chats);
-    // window.store.set({ user });
   } catch (responsError) {
-    // const error = await responsError.json();
-    // window.store.set({ loginError: error.reason });
+    console.error(responsError);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -77,8 +64,7 @@ export const addUser = async (data) => {
     // window.router.go(ROUTER.chats);
     // window.store.set({ user });
   } catch (responsError) {
-    // const error = await responsError.json();
-    // window.store.set({ loginError: error.reason });
+    console.error(responsError);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -89,11 +75,8 @@ export const deleteUser = async () => {
   try {
     const response = await chatApi.deleteUser();
     console.log(response, 'getChats');
-    // window.router.go(ROUTER.chats);
-    // window.store.set({ user });
   } catch (responsError) {
-    // const error = await responsError.json();
-    // window.store.set({ loginError: error.reason });
+    console.error(responsError);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -103,13 +86,10 @@ export const getTokenChat = async (id) => {
   window.store.set({ isLoading: true });
   try {
     const response = await chatApi.pingTokenChats(id);
-    // window.router.go(ROUTER.chats);
-    // console.log(response, 'getTokenChat');
     window.store.set({ token_chat: JSON.parse(response).token });
     return JSON.parse(response);
   } catch (responsError) {
-    // const error = await responsError.json();
-    // window.store.set({ loginError: error.reason });
+    console.error(responsError);
     return { token: null };
   } finally {
     window.store.set({ isLoading: false });

@@ -53,11 +53,10 @@
 import Block from '@/shared/core/block.ts';
 import template from './Sidebar.hbs?raw';
 import {
-  Avatar, Button, ChatItem, Message, SearchBlock,
+  Avatar, Button, ChatItem, SearchBlock,
 } from '@/shared';
-import { IChatItem, MessageType } from '@/shared/type';
+import { IChatItem } from '@/shared/type';
 import { ROUTER } from '@/shared/constants/constants.ts';
-import { getTokenChat, getUsersInChat } from '@/shared/services/chats.ts';
 import * as chatServices from '@/shared/services/chats.ts';
 
 interface ISidebar {
@@ -96,46 +95,15 @@ export default class Login extends Block {
         onClick: (id) => {
           console.log('choice chat', id);
           chatServices.getUsersInChat(id);
-          window.store.set({ chat_id: id, choice_chat: this.props.chats.find((chat) => chat.id === id) });
+          window.store.set({ chat_id: id, choice_chat: this.props.chats.find((chat: IChatItem) => chat.id === id) });
         },
       }));
     }
 
     return true;
-
-    // console.log(this.children, 'this.children componentDidUpdate');
   }
 
   render(): string {
-    // const { activeCatIndex } = this.props;
-    // const { ChatList } = this.children;
-    // //
-    // if (this.props.chats) {
-    //   console.log(this.children, 'this.children');
-    //   console.log(ChatList, 'ChatList');
-    //   this.props.chats.map((propsChat: IChatItem, index) => new ChatItem({
-    //     ...propsChat,
-    //     onClick: (id) => {
-    //       window.store.set({ chat_id: id });
-    //     },
-    //   }));
-    //
-    //   console.log('this.props.chats', this.props.chats);
-    // }
-
-    // if (!(chatList instanceof Block)) {
-    //   chatList.forEach((chat: Block, index: number) => {
-    //     if (index === activeCatIndex) {
-    //       chat.setProps({ active: true });
-    //       return;
-    //     }
-    //
-    //     if (chat.props.active) {
-    //       chat.setProps({ active: false });
-    //     }
-    //   });
-    // }
-
     return template;
   }
 }

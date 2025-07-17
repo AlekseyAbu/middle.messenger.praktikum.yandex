@@ -12,9 +12,7 @@ export const login = async (model) => {
     console.log(response, 'login in service');
     window.router.go(ROUTER.chats);
   } catch (error) {
-    console.log(error, JSON.parse(error).reason, 'responsError');
-    // const error = await responsError.json();
-    window.store.set({ loginError: JSON.parse(error).reason });
+    console.error(responsError);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -30,9 +28,7 @@ export const register = async (model) => {
     console.log(responseUsers, 'responseUsers');
     // window.router.go(ROUTER.chats);
   } catch (error) {
-    console.log(error, JSON.parse(error).reason, 'responsError');
-    // const error = await responsError.json();
-    window.store.set({ loginError: JSON.parse(error).reason });
+    console.error(responsError);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -48,11 +44,10 @@ export const checkLoginUser = async () => {
   window.store.set({ isLoading: true });
   try {
     const user = await authApi.me();
-    // window.router.go(ROUTER.chats);
+    window.router.go(ROUTER.chats);
     window.store.set({ user });
   } catch (responsError) {
-    // const error = await responsError.json();
-    // window.store.set({ loginError: error.reason });
+    console.error(responsError);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -66,9 +61,7 @@ export const changeUser = async (model) => {
     window.store.set({ users: response });
     // window.router.go(ROUTER.chats);
   } catch (error) {
-    console.log(error, JSON.parse(error).reason, 'responsError');
-    // const error = await responsError.json();
-    window.store.set({ loginError: JSON.parse(error).reason });
+    console.error(error);
   } finally {
     window.store.set({ isLoading: false });
   }
@@ -79,8 +72,7 @@ export const changePassword = async (model) => {
   try {
     await userApi.password(model);
   } catch (error) {
-    console.log(error, JSON.parse(error).reason, 'responsError');
-    // const error = await responsError.json();
+    console.error(error);
     window.store.set({ loginError: JSON.parse(error).reason });
   } finally {
     window.store.set({ isLoading: false });
