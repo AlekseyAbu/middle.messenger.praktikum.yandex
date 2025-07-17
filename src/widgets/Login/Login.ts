@@ -239,7 +239,7 @@ class Login extends Block {
         label: 'Войти',
         type: 'outline',
         onClick: () => {
-          window.router.go(ROUTER.auth);
+          (window as any).router.go(ROUTER.auth);
         },
       }),
     }, { className: 'form' });
@@ -255,7 +255,7 @@ class Login extends Block {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: Record<string, any>) => ({
   isLoading: state.isLoading,
   loginError: state.loginError,
 });

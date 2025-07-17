@@ -5,7 +5,6 @@ import Validator from '@/shared/utils/validate.ts';
 import * as authServices from '../../shared/services/auth';
 import { connect } from '@/shared/store/connect.ts';
 import { ROUTER } from '@/shared/constants/constants.ts';
-import { checkLoginUser } from '../../shared/services/auth';
 
 interface IInterface {
   title?: string;
@@ -99,7 +98,7 @@ class Auth extends Block {
         type: 'outline',
         onClick: (event) => {
           event.preventDefault();
-          window.router.go(ROUTER.login);
+          (window as any).router.go(ROUTER.login);
         },
       }),
     }, {
@@ -118,7 +117,7 @@ class Auth extends Block {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: Record<string, any>) => ({
   isLoading: state.isLoading,
   loginError: state.loginError,
 });

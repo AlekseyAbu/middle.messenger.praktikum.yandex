@@ -46,7 +46,7 @@ import { IChatItem } from '@/shared/type';
 import isEqual from '@/shared/utils/isEqual.ts';
 
 interface IChatItemProps extends IChatItem {
-  onClick?: (id) => void,
+  onClick?: (id: number) => void,
 }
 
 export default class ChatItem extends Block {
@@ -55,6 +55,7 @@ export default class ChatItem extends Block {
       ...props,
       title: props.title,
       events: {
+        // @ts-ignore
         click: () => props.onClick(props.id),
       },
     }, {

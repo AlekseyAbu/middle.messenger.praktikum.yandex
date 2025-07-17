@@ -9,7 +9,7 @@ interface IButton {
   label?: string,
   icon?: string,
   typeBtn?: string,
-  onClick?: (event) => void,
+  onClick?: (event: Event) => void,
 }
 
 export default class Button extends Block {

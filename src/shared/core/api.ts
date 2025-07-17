@@ -41,18 +41,18 @@ export default class HTTPTransport {
     this.apiUrl = `https://ya-praktikum.tech/api/v2${apiPath}`;
   }
 
-  get(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
+  get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     return this.request(`${this.apiUrl}${url}`, { ...options, method: METHOD.GET });
   }
 
-  post(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
+  post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     return this.request(
       `${this.apiUrl}${url}`,
       { ...options, method: METHOD.POST, headers: { 'Content-Type': 'application/json' } },
     );
   }
 
-  put(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
+  put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     return this.request(`${this.apiUrl}${url}`, {
       ...options,
       method: METHOD.PUT,
@@ -60,7 +60,7 @@ export default class HTTPTransport {
     });
   }
 
-  delete(url: string, options: OptionsWithoutMethod = {}): Promise<Response> {
+  delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     return this.request(
       `${this.apiUrl}${url}`,
       { ...options, method: METHOD.DELETE, headers: { 'Content-Type': 'application/json' } },
@@ -71,7 +71,7 @@ export default class HTTPTransport {
     url: string,
     options: Options = { method: METHOD.GET },
     timeout = 5000,
-  ): Promise<Response> {
+  ): Promise<XMLHttpRequest> {
     const { method, data, headers = {} } = options;
 
     return new Promise((resolve, reject) => {

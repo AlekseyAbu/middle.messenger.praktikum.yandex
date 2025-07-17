@@ -66,12 +66,12 @@ class Settings extends Block {
           this.setProps({ isPassword: false });
           this.setProps({ isDefault: false });
 
-          this.children.SettingEmail.setProps({ disabled: false });
-          this.children.SettingLogin.setProps({ disabled: false });
-          this.children.SettingFirstName.setProps({ disabled: false });
-          this.children.SettingSecondName.setProps({ disabled: false });
-          this.children.SettingDisplayName.setProps({ disabled: false });
-          this.children.SettingPhone.setProps({ disabled: false });
+          (this.children.SettingEmail as Block).setProps({ disabled: false });
+          (this.children.SettingLogin as Block).setProps({ disabled: false });
+          (this.children.SettingFirstName as Block).setProps({ disabled: false });
+          (this.children.SettingSecondName as Block).setProps({ disabled: false });
+          (this.children.SettingDisplayName as Block).setProps({ disabled: false });
+          (this.children.SettingPhone as Block).setProps({ disabled: false });
           console.log(this.props.formState);
         },
       }),
@@ -84,9 +84,9 @@ class Settings extends Block {
           this.setProps({ isPassword: true });
           this.setProps({ isDefault: false });
 
-          this.children.SettingOldPassword.setProps({ value: '' });
-          this.children.SettingNewPassword.setProps({ value: '' });
-          this.children.SettingNewReplayPassword.setProps({ value: '' });
+          (this.children.SettingOldPassword as Block).setProps({ value: '' });
+          (this.children.SettingNewPassword as Block).setProps({ value: '' });
+          (this.children.SettingNewReplayPassword as Block).setProps({ value: '' });
         },
       }),
       ButtonExit: new Button({
@@ -406,7 +406,7 @@ class Settings extends Block {
         } = this.children;
 
         if (SettingEmail instanceof Block) {
-          this.children.SettingEmail.setProps({ value: email });
+          (this.children.SettingEmail as Block).setProps({ value: email });
         }
         if (SettingLogin instanceof Block) {
           SettingLogin.setProps({ value: login });
@@ -481,7 +481,7 @@ class Settings extends Block {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: Record<string, any>) => ({
   user: state.user,
 });
 

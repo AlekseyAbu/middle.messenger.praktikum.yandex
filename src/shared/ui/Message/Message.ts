@@ -1,5 +1,5 @@
 import Block from '@/shared/core/block.ts';
-import template from './Message.hbs?raw';
+// import template from './Message.hbs?raw';
 import { MessageType } from '@/shared/type';
 import isEqual from '@/shared/utils/isEqual.ts';
 

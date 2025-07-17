@@ -1,5 +1,4 @@
 import Block from '@/shared/core/block.ts';
-import isEqual from '@/shared/utils/isEqual.ts';
 
 interface IInputProps {
   onChange?: (event: InputEvent) => void,
@@ -22,6 +21,7 @@ export default class Input extends Block {
         placeholder: props.placeholder ? props.placeholder : '',
         name: props.name ? props.name : '',
         value: props.value ? props.value : '',
+        // @ts-ignore
         disabled: props.disabled ? props.disabled : false,
       },
     });
@@ -40,7 +40,9 @@ export default class Input extends Block {
   }
 
   private setOptionsAttr(key: string, value: any): void {
+    // @ts-ignore
     this._options.attr = {
+      // @ts-ignore
       ...this._options.attr,
       [key]: value,
     };

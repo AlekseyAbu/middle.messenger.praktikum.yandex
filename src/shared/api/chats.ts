@@ -1,38 +1,33 @@
-import * as zlib from 'node:zlib';
 import HTTPTransport from '@/shared/core/api.ts';
 
 const authApi = new HTTPTransport('/chats');
 
 export default class ChatsApi {
-  async listChats(): Promise<Response> {
+  async listChats(): Promise<XMLHttpRequest> {
     return authApi.get('/');
   }
 
-  async userInChat(id): Promise<Response> {
+  async userInChat(id: number): Promise<XMLHttpRequest> {
     return authApi.get(`/${id}/users`);
   }
 
-  async createChat(data): Promise<Response> {
+  async createChat(data: Record<string, any>): Promise<XMLHttpRequest> {
     return authApi.post('/', { data });
   }
 
-  async addUser(): Promise<Response> {
-    return authApi.post('/token');
-  }
-
-  async deleteUser(): Promise<Response> {
+  async deleteUser(): Promise<XMLHttpRequest> {
     return authApi.delete('/users');
   }
 
-  async addUserInChat(data): Promise<XMLHttpRequest> {
+  async addUserInChat(data: Record<string, any>): Promise<XMLHttpRequest> {
     return authApi.put('/users', { data });
   }
 
-  async deleteUserInChat(data): Promise<XMLHttpRequest> {
+  async deleteUserInChat(data: Record<string, any>): Promise<XMLHttpRequest> {
     return authApi.delete('/users', { data });
   }
 
-  async pingTokenChats(id): Promise<XMLHttpRequest> {
+  async pingTokenChats(id: number): Promise<XMLHttpRequest> {
     return authApi.post(`/token/${id}`);
   }
 }

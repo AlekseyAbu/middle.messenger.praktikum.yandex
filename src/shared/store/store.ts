@@ -1,33 +1,40 @@
+// @ts-ignore
 import EventBus from '../core/eventBus';
 
 export enum StoreEvents {
   Updated = 'Updated',
 }
 
-export class Store extends EventBus {
-  private state = {};
+type Indexed<T = any> = {
+  [key: string]: T;
+};
 
-  constructor(defaultState) {
+export class Store extends EventBus {
+  private state: Indexed | undefined;
+
+  private static __instance: Store;
+
+  constructor(defaultState: Indexed = {}) {
+    super();
+
     if (Store.__instance) {
       return Store.__instance;
     }
-    super();
 
     this.state = defaultState;
-    this.set(defaultState);
-
     Store.__instance = this;
   }
 
-  public getState() {
-    return this.state;
+  public getState(): Indexed {
+    if (this.state) {
+      return this.state;
+    }
+    return {};
   }
 
-  public set(nextState) {
+  public set(nextState: Indexed): void {
     const prevState = { ...this.state };
-
     this.state = { ...this.state, ...nextState };
-
-    this.emit(StoreEvents.Updated, prevState, nextState);
+    this.emit(StoreEvents.Updated, prevState, this.state);
   }
 }

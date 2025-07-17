@@ -81,7 +81,7 @@ export default class Login extends Block {
         label: 'Профиль',
         type: 'arrow',
         onClick: () => {
-          window.router.go(ROUTER.users);
+          (window as any).router.go(ROUTER.users);
         },
       }),
 
@@ -90,12 +90,15 @@ export default class Login extends Block {
 
   componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
     if (oldProps.chats !== newProps.chats) {
-      this.children.ChatList = newProps.chats.map((propsChat: IChatItem, index) => new ChatItem({
+      this.children.ChatList = newProps.chats.map((propsChat: IChatItem) => new ChatItem({
         ...propsChat,
         onClick: (id) => {
           console.log('choice chat', id);
           chatServices.getUsersInChat(id);
-          window.store.set({ chat_id: id, choice_chat: this.props.chats.find((chat: IChatItem) => chat.id === id) });
+          (window as any).store.set({
+            chat_id: id,
+            choice_chat: this.props.chats.find((chat: IChatItem) => chat.id === id),
+          });
         },
       }));
     }

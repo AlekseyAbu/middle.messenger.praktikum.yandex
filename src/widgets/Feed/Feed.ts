@@ -1,9 +1,9 @@
 import Block from '@/shared/core/block.ts';
 import template from './Feed.hbs?raw';
 import {
-  Avatar, Button, ChatItem, Form, Message, Modal,
+  Avatar, Button, Form, Message, Modal,
 } from '@/shared';
-import { IChatItem, MessageType } from '@/shared/type';
+import { MessageType } from '@/shared/type';
 import * as chatServices from '../../shared/services/chats.ts';
 import { ToolTip } from '@/shared/ui/ToolTip';
 import { connect } from '@/shared/store/connect.ts';
@@ -47,6 +47,7 @@ class Feed extends Block {
           event.preventDefault();
           console.log(event, this.socket, 'event');
           console.log(this.props.inputValue, 'this.props.inputValue');
+          // @ts-ignore
           this.socket.send({
             content: this.props.inputValue,
             type: 'message',
@@ -141,7 +142,7 @@ class Feed extends Block {
 
       // Закрываем предыдущее соединение
       if (this.socket) {
-        this.socket.close();
+        // this.socket.close();
         this.socket = null;
       }
 
@@ -194,7 +195,7 @@ class Feed extends Block {
       // Подписываемся на получение сообщений
       this.socket.on(WebSocketEvents.Message, (data: any) => {
         console.log('Received message:', data);
-        window.store.set({ message: data });
+        (window as any).store.set({ message: data });
       });
 
       this.socket.getOldMessages();
@@ -221,7 +222,7 @@ class Feed extends Block {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: Record<string, any>) => ({
   choice_chat: state.choice_chat,
   chat_id: state.chat_id,
   message: state.message,

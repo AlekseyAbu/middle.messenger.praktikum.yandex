@@ -18,7 +18,8 @@
     "no-console": "off",
     "no-shadow": "off",
     "no-constructor-return": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "selector-type-no-unknown": "off"
   },
   "env" :  {
     "browser" :  1

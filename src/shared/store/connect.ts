@@ -1,12 +1,13 @@
 import { StoreEvents } from './store';
 import isEqual from '../utils/isEqual';
 
-export function connect(mapStateToProps) {
-  return function (Component) {
+export function connect(mapStateToProps: any) {
+  return function (Component: any) {
     return class extends Component {
       private onChangeStoreCallback: () => void;
 
-      constructor(props) {
+      constructor(props: any) {
+        // @ts-ignore
         const { store } = window;
         // сохраняем начальное состояние
         let state = mapStateToProps(store.getState());
@@ -32,7 +33,7 @@ export function connect(mapStateToProps) {
 
       componentWillUnmount() {
         super.componentWillUnmount();
-        window.store.off(StoreEvents.Updated, this.onChangeStoreCallback);
+        (window as any).store.off(StoreEvents.Updated, this.onChangeStoreCallback);
       }
     };
   };

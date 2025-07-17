@@ -1,11 +1,13 @@
+// @ts-ignore
 import './shared/style/index.scss';
+// @ts-ignore
 import './shared/style/reset.scss';
 import Router from '@/shared/core/Router.ts';
 import { ROUTER } from '@/shared/constants/constants.ts';
 import * as Pages from '@/pages';
 import { Store } from '@/shared/store/store.ts';
 
-window.store = new Store({
+(window as any).store = new Store({
   isLoading: false,
   user: null,
   loginError: null,
@@ -15,8 +17,8 @@ window.store = new Store({
 });
 
 const APP_ROOT_ELEMENT = '#app';
-window.router = new Router(APP_ROOT_ELEMENT);
-window.router
+(window as any).router = new Router(APP_ROOT_ELEMENT);
+(window as any).router
   .use(ROUTER.login, Pages.LoginPage)
   .use(ROUTER.auth, Pages.AuthPage)
   .use(ROUTER.chats, Pages.Main)

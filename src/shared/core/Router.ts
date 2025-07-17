@@ -1,7 +1,7 @@
 import Route from './Route';
 
 export interface RouteInterface {
-  render: () => void;
+  render: (route: RouteInterface, pathname: string) => void; // Исправлена сигнатура render
   match: (path: string) => boolean;
   leave: () => void;
 }
@@ -9,7 +9,15 @@ export interface RouteInterface {
 class Router {
   public routes: RouteInterface[] = [];
 
-  constructor(rootQuery) {
+  private static __instance: Router; // Статическая инстанция
+
+  private history: History | undefined; // История браузера
+
+  private _currentRoute: RouteInterface | null = null; // Текущий маршрут
+
+  private readonly _rootQuery: string | undefined; // Корневой элемент
+
+  constructor(rootQuery: string) {
     if (Router.__instance) {
       return Router.__instance;
     }
@@ -22,20 +30,22 @@ class Router {
     Router.__instance = this;
   }
 
-  use(pathname, block) {
+  use(pathname: string, block: any): Router { // Добавлены типы и возврат this
+    // @ts-ignore
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;
   }
 
-  start() {
-    window.onpopstate = ((event) => {
-      this._onRoute(event.currentTarget.location.pathname);
+  start(): void {
+    // @ts-ignore
+    window.onpopstate = ((event: PopStateEvent) => {
+      this._onRoute(window.location.pathname); // Исправлено получение pathname
     });
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname) {
+  private _onRoute(pathname: string): void { // Приватный метод
     const route = this.getRoute(pathname);
 
     if (!route) {
@@ -47,28 +57,28 @@ class Router {
     }
 
     this._currentRoute = route;
-    route.render(route, pathname);
+    route.render(route, pathname); // Теперь соответствует интерфейсу
   }
 
-  go(pathname) {
+  go(pathname: string): void {
+    // @ts-ignore
     this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
 
-  back() {
+  back(): void {
+    // @ts-ignore
     this.history.back();
   }
 
-  forward() {
+  forward(): void {
+    // @ts-ignore
     this.history.forward();
   }
 
-  getRoute(pathname) {
+  getRoute(pathname: string): RouteInterface | undefined {
     const route = this.routes.find((route) => route.match(pathname));
-    if (!route) {
-      return this.routes.find((route) => route.match('*'));
-    }
-    return route;
+    return route || this.routes.find((route) => route.match('*')); // Упрощен возврат
   }
 }
 

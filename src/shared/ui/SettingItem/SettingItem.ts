@@ -30,14 +30,14 @@ export default class SettingItem extends Block {
   public componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
     if (oldProps.value !== newProps.value) {
       if (this.children?.Input) {
-        this.children.Input.setProps({ value: newProps.value, disabled: newProps.disabled });
+        (this.children.Input as Block).setProps({ value: newProps.value, disabled: newProps.disabled });
       }
 
       return true;
     }
 
     if (oldProps.disabled !== newProps.disabled) {
-      this.children.Input.setProps({ value: newProps.value, disabled: newProps.disabled });
+      (this.children.Input as Block).setProps({ value: newProps.value, disabled: newProps.disabled });
 
       return true;
     }

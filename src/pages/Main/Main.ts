@@ -25,7 +25,7 @@ class LoginPage extends Block {
 
   public componentDidUpdate(): boolean {
     if (this.props.chats) {
-      this.children.Sidebar.setProps({
+      (this.children.Sidebar as Block).setProps({
         chats: this.props.chats,
       });
     }
@@ -37,7 +37,7 @@ class LoginPage extends Block {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: Record<string, any>) => ({
   user: state.user,
   chats: state.chats,
 });

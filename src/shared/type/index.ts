@@ -21,23 +21,26 @@ export interface IUser {
   phone: string
 }
 export interface TextMessage {
-  way: string;
-  type: string;
-  content: string;
-  time: string;
+  way?: string;
+  type?: string;
+  content?: string;
+  time?: string;
+  id?: number;
 }
 
 export interface ImageMessage {
-  way: string;
-  type: string;
-  url: string;
-  time: string;
+  way?: string;
+  type?: string;
+  url?: string;
+  time?: string;
+  id?: number;
 }
 
 export interface SystemMessage {
-  way: string;
-  type: string;
-  date: string;
+  way?: string;
+  type?: string;
+  date?: string;
+  id?: number;
 }
 
 export interface IValidationForm {

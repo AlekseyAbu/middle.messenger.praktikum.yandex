@@ -4,7 +4,7 @@ import template from './ToolTipItem.hbs?raw';
 interface IToolTipItem {
   value: string,
   type: string,
-  onClick: (type) => void,
+  onClick: (type: string) => void,
 }
 
 export default class ToolTipItem extends Block {

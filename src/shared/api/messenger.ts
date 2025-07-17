@@ -9,7 +9,7 @@ export class MessagesController {
     if (this.transports.has(chatId)) {
       return;
     }
-    const userId = window.store.getState().user?.id;
+    const userId = (window as any).store.getState().user?.id;
 
     const transport = new WebSocketTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
     this.transports.set(chatId, transport);
@@ -47,9 +47,9 @@ export class MessagesController {
 
   static handleMessages(messages: IMessage[] | IMessage, chatId: number) {
     const incomingMessages = Array.isArray(messages) ? messages.reverse() : [messages];
-    const currentMessages = window.store.getState().messages?.[chatId] ?? [];
+    const currentMessages = (window as any).store.getState().messages?.[chatId] ?? [];
     const allMessages = [...currentMessages, ...incomingMessages].filter((message) => message.type === 'message');
-    window.store.set(`messages.${chatId}`, allMessages);
+    (window as any).store.set(`messages.${chatId}`, allMessages);
     if (!Array.isArray(messages)) {
       this.findMessages(chatId);
     }
@@ -57,8 +57,8 @@ export class MessagesController {
   }
 
   static findMessages(chatId: number) {
-    const messages = window.store.getState().messages?.[chatId];
-    window.store.set('currentMessages', messages);
+    const messages = (window as any).store.getState().messages?.[chatId];
+    (window as any).store.set('currentMessages', messages);
   }
 
   static subscribe(transport: WebSocketTransport, chatId: number) {

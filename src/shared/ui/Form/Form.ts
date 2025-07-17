@@ -3,8 +3,8 @@ import template from './Form.hbs?raw';
 import { Button, Input } from '@/shared';
 
 interface IForm {
-  onSubmit?: () => void,
-  onChange?: () => void,
+  onSubmit?: (event: Event) => void,
+  onChange?: (event: Event) => void,
 }
 
 export default class Form extends Block {
