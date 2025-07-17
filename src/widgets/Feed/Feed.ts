@@ -47,7 +47,7 @@ class Feed extends Block {
           event.preventDefault();
           console.log(event, this.socket, 'event');
           console.log(this.props.inputValue, 'this.props.inputValue');
-          // @ts-expect-error
+          // @ts-expect-error не нашел способ ее исправить
           this.socket.send({
             content: this.props.inputValue,
             type: 'message',

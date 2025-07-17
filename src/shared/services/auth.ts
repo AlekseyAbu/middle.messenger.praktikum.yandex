@@ -75,7 +75,7 @@ export const changePassword = async (model: Record<string, any>) => {
     await userApi.password(model);
   } catch (error) {
     console.error(error);
-    // @ts-expect-error
+    // @ts-expect-error не нашел способ ее исправить
     (window as any).store.set({ loginError: JSON.parse(error).reason });
   } finally {
     (window as any).store.set({ isLoading: false });

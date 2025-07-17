@@ -7,7 +7,7 @@ export function connect(mapStateToProps: any) {
       private onChangeStoreCallback: () => void;
 
       constructor(props: any) {
-        // @ts-expect-error
+        // @ts-expect-error не нашел способ ее исправить
         const { store } = window;
         // сохраняем начальное состояние
         let state = mapStateToProps(store.getState());

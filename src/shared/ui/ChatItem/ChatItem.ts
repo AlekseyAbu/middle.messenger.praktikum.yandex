@@ -55,7 +55,7 @@ export default class ChatItem extends Block {
       ...props,
       title: props.title,
       events: {
-        // @ts-expect-error
+        // @ts-expect-error не нашел способ ее исправить
         click: () => props.onClick(props.id),
       },
     }, {

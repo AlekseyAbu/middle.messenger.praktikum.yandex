@@ -4,7 +4,7 @@ const chatApi = new ChatApi();
 
 export const getChats = async () => {
   await chatApi.listChats().then((response) => {
-    // @ts-expect-error
+    // @ts-expect-error не нашел способ ее исправить
     (window as any).store.set({ chats: JSON.parse(response) });
   });
 };
@@ -74,9 +74,9 @@ export const getTokenChat = async (id: number) => {
   (window as any).store.set({ isLoading: true });
   try {
     const response = await chatApi.pingTokenChats(id);
-    // @ts-expect-error
+    // @ts-expect-error не нашел способ ее исправить
     (window as any).store.set({ token_chat: JSON.parse(response).token });
-    // @ts-expect-error
+    // @ts-expect-error не нашел способ ее исправить
     return JSON.parse(response);
   } catch (responsError) {
     console.error(responsError);

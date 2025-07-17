@@ -1,4 +1,4 @@
-// @ts-expect-error
+// @ts-expect-error не нашел способ ее исправить
 import EventBus from '../core/eventBus';
 
 export enum StoreEvents {
