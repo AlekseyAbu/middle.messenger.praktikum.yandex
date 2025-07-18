@@ -12,8 +12,11 @@ export const login = async (model: LoginRequestData) => {
   try {
     const response = await authApi.login(model);
     console.log(response, 'login in service');
-    (window as any).store.go(ROUTER.chats);
+    (window as any).router.go(ROUTER.chats);
   } catch (error) {
+    if (JSON.parse((error as string)).reason === 'User already in system') {
+      (window as any).router.go(ROUTER.chats);
+    }
     console.error(error);
   } finally {
     (window as any).store.set({ isLoading: false });
