@@ -34,7 +34,6 @@ export class Store extends EventBus {
   public set(nextState: Indexed): void {
     const prevState = { ...this.state };
     this.state = { ...this.state, ...nextState };
-    // @ts-expect-error не нашел способ ее исправить
     this.emit(StoreEvents.Updated, prevState, this.state);
   }
 }
