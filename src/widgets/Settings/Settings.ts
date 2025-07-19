@@ -382,12 +382,12 @@ class Settings extends Block {
   }
 
   public componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): boolean {
+    console.log('componentDidUpdate');
     if (this.props.user) {
       // if (!isEqual(oldProps.user, newProps.user ) && newProps.user) {
       const data = JSON.parse(this.props.user);
 
       if (!isEqual(this.props.formState, data) && !this.props.isChange) {
-        console.log('ehy');
         this.setProps({
           formState: {
             ...this.props.formState,
@@ -434,6 +434,48 @@ class Settings extends Block {
   }
 
   render(): string {
+    if (this.props.user) {
+      // if (!isEqual(oldProps.user, newProps.user ) && newProps.user) {
+      const data = JSON.parse(this.props.user);
+
+      if (!isEqual(this.props.formState, data) && !this.props.isChange) {
+        this.setProps({
+          formState: {
+            ...this.props.formState,
+            ...data,
+          },
+        });
+      }
+
+      if (data) {
+        const {
+          email, login, first_name, second_name, display_name, phone,
+        } = data;
+
+        const {
+          SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone,
+        } = this.children;
+
+        if (SettingEmail instanceof Block) {
+          (this.children.SettingEmail as Block).setProps({ value: email });
+        }
+        if (SettingLogin instanceof Block) {
+          SettingLogin.setProps({ value: login });
+        }
+        if (SettingFirstName instanceof Block) {
+          SettingFirstName.setProps({ value: first_name });
+        }
+        if (SettingSecondName instanceof Block) {
+          SettingSecondName.setProps({ value: second_name });
+        }
+        if (SettingDisplayName instanceof Block) {
+          SettingDisplayName.setProps({ value: display_name || '' });
+        }
+        if (SettingPhone instanceof Block) {
+          SettingPhone.setProps({ value: phone });
+        }
+      }
+    }
     // const {
     //   SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone,
     // } = this.children;
