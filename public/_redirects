@@ -1,0 +1,4 @@
+# Redirects from what the browser requests to what we serve
+/sign-up                /sign-up
+/settings    /settings
+/messenger               /messenger
