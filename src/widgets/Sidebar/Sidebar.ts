@@ -100,10 +100,21 @@ export default class Login extends Block {
             choice_chat: this.props.chats.find((chat: IChatItem) => chat.id === id),
           });
         },
+        last_message: {
+          ...propsChat.last_message,
+          time: propsChat.last_message?.time ? this.formatTime(propsChat.last_message.time) : '',
+        },
       }));
     }
 
     return true;
+  }
+
+  private formatTime(timeString: string): string {
+    const date = new Date(timeString);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
   }
 
   render(): string {

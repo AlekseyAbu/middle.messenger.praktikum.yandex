@@ -8,6 +8,7 @@ export interface IChatItem {
     content: string,
   },
   title?: string,
+  time?: string,
   unread_count?: number,
   active?: boolean,
 }
@@ -27,6 +28,7 @@ export interface TextMessage {
   content?: string;
   time?: string;
   id?: number;
+  user_id?: number;
 }
 
 export interface ImageMessage {
@@ -35,13 +37,16 @@ export interface ImageMessage {
   url?: string;
   time?: string;
   id?: number;
+  user_id?: number;
 }
 
 export interface SystemMessage {
   way?: string;
+  time?: string;
   type?: string;
   date?: string;
   id?: number;
+  user_id?: number;
 }
 
 export interface IValidationForm {

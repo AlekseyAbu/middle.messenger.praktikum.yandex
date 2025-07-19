@@ -35,6 +35,7 @@ class Feed extends Block {
         src: 'https://lastfm.freetls.fastly.net/i/u/ar0/708e7517998748bac8a19f4a42635124.png',
         size: 's',
       }),
+      feedList: null,
       Form: new Form({
         onChange: (event) => {
           const { value } = event.target as HTMLInputElement;
@@ -63,8 +64,6 @@ class Feed extends Block {
           this.setProps({ openToolTip: !this.props.openToolTip });
         },
       }),
-
-      feedList: '',
 
       Modal: new Modal({
         title: '',
@@ -155,15 +154,26 @@ class Feed extends Block {
 
     if (this.props.message) {
       console.log(this.props.message, 'this.props.message');
-      this.children.feedList = this.props.message.map((propsFeed: MessageType) => new Message({
-        ...propsFeed,
-        way: propsFeed.id === this.props.user_id ? 'out' : 'in',
-      }));
-
-      console.log(this.children.feedList, 'his.children.feedList');
+      const messages = typeof this.props.message === 'string' ? JSON.parse(this.props.message) : this.props.message;
+      this.children.feedList = messages.reverse().map((propsFeed: MessageType) => {
+        const way = propsFeed.user_id === this.props.user.id ? 'out' : 'in';
+        console.log(way, 'his.children.feedList');
+        return new Message({
+          ...propsFeed,
+          way,
+          time: propsFeed.time ? this.formatTime(propsFeed.time) : '',
+        });
+      });
     }
 
     return true;
+  }
+
+  private formatTime(timeString: string): string {
+    const date = new Date(timeString);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
   }
 
   public init(): void {
@@ -195,7 +205,13 @@ class Feed extends Block {
       // Подписываемся на получение сообщений
       this.socket.on(WebSocketEvents.Message, (data: any) => {
         console.log('Received message:', data);
-        (window as any).store.set({ message: data });
+        if (!this.props.message) {
+          console.log('clear');
+          (window as any).store.set({ message: data });
+        } else {
+          const message = [...this.props.message, data];
+          (window as any).store.set({ message });
+        }
       });
 
       this.socket.getOldMessages();
@@ -212,11 +228,11 @@ class Feed extends Block {
 
   render(): string {
     // this.children.Modal.setProps({ title: this.props.titleModal });
-    if (this.props.message) {
-      this.children.feedList = this.props.message.map((propsFeed: MessageType) => new Message({
-        ...propsFeed,
-      }));
-    }
+    // if (this.props.message) {
+    //   this.children.feedList = this.props.message.map((propsFeed: MessageType) => new Message({
+    //     ...propsFeed,
+    //   }));
+    // }
 
     return template;
   }
