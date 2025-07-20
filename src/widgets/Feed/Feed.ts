@@ -44,13 +44,13 @@ class Feed extends Block {
             inputValue: value,
           });
         },
-        onSubmit: (event) => {
-          event.preventDefault();
-          console.log(event, this.socket, 'event');
-          console.log(this.props.inputValue, 'this.props.inputValue');
+        onSubmit: (str: string) => {
+          // event.preventDefault();
+          // console.log(event, this.socket, 'event');
+          // console.log(this.props.inputValue, 'this.props.inputValue');
           // @ts-expect-error не нашел способ ее исправить
           this.socket.send({
-            content: this.props.inputValue,
+            content: str,
             type: 'message',
           });
         },
@@ -135,13 +135,15 @@ class Feed extends Block {
   }
 
   componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): boolean {
+    console.log();
     if (oldProps.chat_id !== newProps.chat_id) {
       this.setProps({ choiceChat: !!newProps.chat_id });
       this.setProps({ name: this.props.choice_chat.title });
 
       // Закрываем предыдущее соединение
+      console.log(this.socket, 'this.socket');
       if (this.socket) {
-        // this.socket.close();
+        this.socket.close();
         this.socket = null;
       }
 
@@ -155,6 +157,7 @@ class Feed extends Block {
     if (this.props.message) {
       console.log(this.props.message, 'this.props.message');
       const messages = typeof this.props.message === 'string' ? JSON.parse(this.props.message) : this.props.message;
+      console.log(messages, 'messages');
       this.children.feedList = messages.reverse().map((propsFeed: MessageType) => {
         const way = propsFeed.user_id === this.props.user.id ? 'out' : 'in';
         console.log(way, 'his.children.feedList');

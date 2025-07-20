@@ -71,7 +71,10 @@ export default class Login extends Block {
       activeCatIndex: -1,
       ChatList: chats.map((propsChat: IChatItem, index) => new ChatItem({
         ...propsChat,
-        onClick: () => this.setProps({ activeCatIndex: index }),
+        onClick: () => {
+          this.setProps({ activeCatIndex: index });
+          (window as any).store.set({ message: [] });
+        },
       })),
       SearchBlock: new SearchBlock({ }),
 

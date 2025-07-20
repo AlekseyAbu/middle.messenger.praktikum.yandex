@@ -5,17 +5,19 @@ interface IAvatar {
   src: string,
   size: string,
   name?: string,
+  customClass?: string,
   onClick?: () => void,
 }
 
 export default class Avatar extends Block {
   constructor(props: IAvatar) {
     const {
-      src, size, name, onClick,
+      src, size, name, customClass, onClick,
     } = props;
     super('div', {
       src,
       name,
+      customClass,
       events: {
         click: onClick,
       },

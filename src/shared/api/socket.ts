@@ -62,6 +62,12 @@ export class WebSocketTransport extends EventBus {
     );
   }
 
+  public close() {
+    if (this.socket) {
+      this.socket.close();
+    }
+  }
+
   private addEventListeners(socket: WebSocket) {
     socket.addEventListener(WebSocketEvents.Open, () => {
       this.emit(WebSocketEvents.Connect);
@@ -70,6 +76,7 @@ export class WebSocketTransport extends EventBus {
     socket.addEventListener(WebSocketEvents.Close, (event: CloseEvent) => {
       if (event.wasClean) {
         console.log('Соединение закрыто чисто', event.reason);
+        (window as any).store.set({ message: null });
       } else {
         console.log('Обрыв соединения');
       }

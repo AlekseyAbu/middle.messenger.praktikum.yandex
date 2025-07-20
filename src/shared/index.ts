@@ -12,3 +12,4 @@ export { Form } from './ui/Form/index.ts';
 export { SettingItem } from './ui/SettingItem/index.ts';
 export { Modal } from './ui/Modal/index.ts';
 export { ToolTip } from './ui/ToolTip/index.ts';
+export { AvatarInput } from './ui/AvatarInput/index.ts';

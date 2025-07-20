@@ -6,6 +6,7 @@ interface ISettingItem {
   onChange?: (event: InputEvent) => void,
   value: string,
   name: string,
+  error?: string,
   disabled?: boolean,
   nameSetting: string,
 }

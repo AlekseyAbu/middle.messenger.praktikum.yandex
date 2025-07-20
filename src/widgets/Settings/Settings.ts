@@ -1,6 +1,8 @@
 import Block from '@/shared/core/block.ts';
 import template from './Settings.hbs?raw';
-import { Avatar, Button, SettingItem } from '@/shared';
+import {
+  Avatar, Button, Modal, SettingItem,
+} from '@/shared';
 import Validator from '@/shared/utils/validate.ts';
 import * as authServices from '../../shared/services/auth';
 import { connect } from '@/shared/store/connect.ts';
@@ -31,11 +33,15 @@ class Settings extends Block {
         oldPassword: '',
         newPassword: '',
       },
+      openModal: false,
+      avatarFile: null,
       ButtonSave: new Button({
         type: 'primary',
         label: 'Сохранить',
         onClick: (event) => {
           event.preventDefault();
+          console.log();
+          if (this.props.error) return;
           // this.setProps({ errorForm: validator.validateForm(this.props.formState) });
           if (this.props.isPassword) {
             authServices.changePassword({
@@ -44,6 +50,8 @@ class Settings extends Block {
             });
             this.setProps({ isPassword: false });
           } else {
+            if (validator.validateForm(this.props.formState)) return;
+            this.setProps({ errorForm: validator.validateForm(this.props.formState) });
             authServices.changeUser({
               first_name: this.props.formState.first_name,
               second_name: this.props.formState.second_name,
@@ -103,9 +111,40 @@ class Settings extends Block {
         icon: 'arrow-line.svg',
         view: 'arrow',
       }),
+      Modal: new Modal({
+        title: 'Изменить аватар',
+        isUpdateAvatar: true,
+        onChange: (event) => {
+          console.log(event, 'event');
+          const input = event.target as HTMLInputElement;
+          const file = input.files?.[0];
+
+          if (!file) return;
+
+          const formData = new FormData();
+          formData.append('avatar', file);
+
+          this.setProps({ avatarFile: formData });
+        },
+        onClick: (str) => {
+          if (this.props.avatarFile) {
+            authServices.updateAvatar(this.props.avatarFile);
+          }
+          console.log(str);
+          this.setProps({
+            openModal: false,
+          });
+        },
+      }),
       Avatar: new Avatar({
-        src: 'https://lastfm.freetls.fastly.net/i/u/ar0/708e7517998748bac8a19f4a42635124.png',
+        src: '',
         size: 'l',
+        customClass: 'profile-avatar',
+        onClick: () => {
+          this.setProps({
+            openModal: true,
+          });
+        },
       }),
       SettingEmail: new SettingItem({
         nameSetting: 'Почта',
@@ -267,6 +306,7 @@ class Settings extends Block {
             error = 'Введите от 10 до 15 цифр';
           }
 
+          console.log(error, !value.length, 'error');
           if (!value.length) {
             error = '';
           }
@@ -401,8 +441,12 @@ class Settings extends Block {
           email, login, first_name, second_name, display_name, phone,
         } = data;
 
+        if (this.props.name !== first_name) {
+          this.setProps({ name: first_name });
+        }
+
         const {
-          SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone,
+          SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone, Avatar,
         } = this.children;
 
         if (SettingEmail instanceof Block) {
@@ -422,6 +466,9 @@ class Settings extends Block {
         }
         if (SettingPhone instanceof Block) {
           SettingPhone.setProps({ value: phone });
+        }
+        if (Avatar instanceof Block) {
+          Avatar.setProps({ src: data.avatar });
         }
       }
     }
@@ -453,7 +500,7 @@ class Settings extends Block {
         } = data;
 
         const {
-          SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone,
+          SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone, Avatar,
         } = this.children;
 
         if (SettingEmail instanceof Block) {
@@ -473,6 +520,9 @@ class Settings extends Block {
         }
         if (SettingPhone instanceof Block) {
           SettingPhone.setProps({ value: phone });
+        }
+        if (Avatar instanceof Block) {
+          Avatar.setProps({ src: data.avatar });
         }
       }
     }

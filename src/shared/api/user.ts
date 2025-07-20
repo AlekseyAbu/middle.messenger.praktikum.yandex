@@ -11,4 +11,8 @@ export default class UserApi {
   async password(data: Record<string, string>): Promise<XMLHttpRequest> {
     return userApi.put('/password', { data });
   }
+
+  async putAvatar(data: FormData): Promise<XMLHttpRequest> {
+    return userApi.put('/profile/avatar', { data });
+  }
 }

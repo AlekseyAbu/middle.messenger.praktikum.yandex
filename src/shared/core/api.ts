@@ -56,7 +56,6 @@ export default class HTTPTransport {
     return this.request(`${this.apiUrl}${url}`, {
       ...options,
       method: METHOD.PUT,
-      headers: { 'Content-Type': 'application/json' },
     });
   }
 
@@ -86,6 +85,12 @@ export default class HTTPTransport {
           : url,
       );
 
+      // 1. Не устанавливаем Content-Type автоматически для FormData
+      const isFormData = data instanceof FormData;
+      if (!isFormData && !headers['Content-Type']) {
+        headers['Content-Type'] = 'application/json';
+      }
+
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
@@ -110,8 +115,12 @@ export default class HTTPTransport {
       xhr.timeout = timeout;
       xhr.ontimeout = handleError;
 
+      // 2. Отправляем данные в правильном формате
       if (isGet || !data) {
         xhr.send();
+      } else if (isFormData) {
+        // Для FormData не нужно преобразование
+        xhr.send(data as FormData);
       } else {
         xhr.send(JSON.stringify(data));
       }

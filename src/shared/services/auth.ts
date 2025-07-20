@@ -84,3 +84,18 @@ export const changePassword = async (model: Record<string, any>) => {
     (window as any).store.set({ isLoading: false });
   }
 };
+
+export const updateAvatar = async (data: FormData) => {
+  (window as any).store.set({ isLoading: true });
+  try {
+    const response = await userApi.putAvatar(data);
+    console.log('Аватар обновлён:', response);
+    (window as any).store.set({ users: response });
+  } catch (error) {
+    console.error(error);
+    // @ts-expect-error не нашел способ ее исправить
+    (window as any).store.set({ loginError: JSON.parse(error).reason });
+  } finally {
+    (window as any).store.set({ isLoading: false });
+  }
+};

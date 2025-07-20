@@ -205,7 +205,7 @@ export default class Block {
       this._element?.setAttribute('value', this.props.value);
     }
 
-    this._updateAttributes();
+    // this._updateAttributes();
     this._addEvents();
   }
 
@@ -244,6 +244,7 @@ export default class Block {
 
   private _updateAttributes(): void {
     if (!this._element || !this._options.attr) return;
+    console.log(this._options.attr, 'this._options.attr');
 
     Object.entries(this._options.attr).forEach(([attrName, attrValue]) => {
       if (typeof attrValue === 'boolean') {
@@ -253,7 +254,7 @@ export default class Block {
           this._element!.removeAttribute(attrName);
         }
       } else {
-        // this._element!.setAttribute(attrName, attrValue as string);
+        this._element!.setAttribute(attrName, attrValue as string);
       }
     });
   }

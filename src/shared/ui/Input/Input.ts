@@ -29,10 +29,12 @@ export default class Input extends Block {
 
   componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
     if (oldProps.value !== newProps.value) {
+      console.log('new props', newProps.value);
       this.setProps({ value: newProps.value });
     }
 
     if (oldProps.disabled !== newProps.disabled) {
+      console.log(newProps.disabled, 'newProps.disabled');
       this.setOptionsAttr('disabled', newProps.disabled ?? false);
     }
 
@@ -46,6 +48,8 @@ export default class Input extends Block {
       ...this._options.attr,
       [key]: value,
     };
+    // @ts-expect-error не нашел способ ее исправить
+    this._updateAttributes();
   }
 
   render(): string {
