@@ -7,6 +7,7 @@ import Validator from '@/shared/utils/validate.ts';
 import * as authServices from '../../shared/services/auth';
 import { connect } from '@/shared/store/connect.ts';
 import isEqual from '@/shared/utils/isEqual.ts';
+import Name from '@/widgets/Settings/Name.ts';
 
 interface ISettings {
   name: string
@@ -82,6 +83,9 @@ class Settings extends Block {
           (this.children.SettingPhone as Block).setProps({ disabled: false });
           console.log(this.props.formState);
         },
+      }),
+      Name: new Name({
+        name: '',
       }),
       ButtonChangePassword: new Button({
         type: 'outline',
@@ -441,12 +445,13 @@ class Settings extends Block {
           email, login, first_name, second_name, display_name, phone,
         } = data;
 
-        if (this.props.name !== first_name) {
-          this.setProps({ name: first_name });
-        }
+        // console.log(oldProps.name, 'oldProps.name');
+        // if (oldProps.name !== first_name) {
+        //   this.setProps({ name: first_name });
+        // }
 
         const {
-          SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone, Avatar,
+          SettingEmail, SettingLogin, Name, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone, Avatar,
         } = this.children;
 
         if (SettingEmail instanceof Block) {
@@ -469,6 +474,9 @@ class Settings extends Block {
         }
         if (Avatar instanceof Block) {
           Avatar.setProps({ src: data.avatar });
+        }
+        if (Name instanceof Block) {
+          Name.setProps({ name: first_name });
         }
       }
     }
@@ -500,8 +508,13 @@ class Settings extends Block {
         } = data;
 
         const {
-          SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone, Avatar,
+          SettingEmail, SettingLogin, Name, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone, Avatar,
         } = this.children;
+
+        // console.log(this.props.name, '12312312321');
+        // if (this.props.name !== first_name) {
+        //   this.setProps({ name: first_name });
+        // }
 
         if (SettingEmail instanceof Block) {
           (this.children.SettingEmail as Block).setProps({ value: email });
@@ -524,50 +537,11 @@ class Settings extends Block {
         if (Avatar instanceof Block) {
           Avatar.setProps({ src: data.avatar });
         }
+        if (Name instanceof Block) {
+          Name.setProps({ name: first_name });
+        }
       }
     }
-    // const {
-    //   SettingEmail, SettingLogin, SettingFirstName, SettingSecondName, SettingDisplayName, SettingPhone,
-    // } = this.children;
-
-    // const data = JSON.parse(this.props.user);
-    //
-    // console.log(data, 'data');
-
-    // if (SettingEmail instanceof Block) {
-    //   SettingEmail.setProps({ disabled: this.props.isChange });
-    //   if (data?.email) {
-    //     SettingEmail.setProps({ value: data.email });
-    //   }
-    // }
-    // //
-    // if (SettingLogin instanceof Block) {
-    //   if (data?.login) {
-    //     SettingLogin.setProps({ value: data.login });
-    //   }
-    // }
-    //
-    // if (SettingFirstName instanceof Block) {
-    //   if (data?.first_name) {
-    //     SettingFirstName.setProps({ value: data.first_name });
-    //   }
-    // }
-    //
-    // if (SettingSecondName instanceof Block) {
-    //   if (data?.second_name) {
-    //     SettingSecondName.setProps({ value: data.second_name });
-    //   }
-    // }
-    //
-    // if (SettingDisplayName instanceof Block) {
-    //   SettingDisplayName.setProps({ value: data?.second_name || '' });
-    // }
-    //
-    // if (SettingPhone instanceof Block) {
-    //   if (data?.phone) {
-    //     SettingPhone.setProps({ value: data.phone });
-    //   }
-    // }
 
     return template;
   }

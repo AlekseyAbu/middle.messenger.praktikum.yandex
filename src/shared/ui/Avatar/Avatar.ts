@@ -26,6 +26,16 @@ export default class Avatar extends Block {
     });
   }
 
+  public componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
+    if (oldProps.src !== newProps.src) {
+      this.setProps({ value: newProps.src });
+
+      return true;
+    }
+
+    return false;
+  }
+
   render(): string {
     return template;
   }
