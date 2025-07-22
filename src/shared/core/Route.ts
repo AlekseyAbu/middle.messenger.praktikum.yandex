@@ -1,4 +1,4 @@
-import { RouteInterface } from './Router';
+import { RouteInterface } from './Router.ts';
 
 // Интерфейс для блоков (компонентов)
 interface Block {

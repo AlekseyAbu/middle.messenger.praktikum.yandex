@@ -22,6 +22,7 @@
     "selector-type-no-unknown": "off"
   },
   "env" :  {
-    "browser" :  1
+    "browser" :  1,
+    "jest": true
   }
 }

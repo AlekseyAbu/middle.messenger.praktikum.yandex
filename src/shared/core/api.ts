@@ -1,4 +1,4 @@
-enum METHOD {
+export enum METHOD {
   // eslint-disable-next-line no-unused-vars
   GET = 'GET',
   // eslint-disable-next-line no-unused-vars

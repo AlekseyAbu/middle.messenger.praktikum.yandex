@@ -1,4 +1,4 @@
-import Route from './Route';
+import Route from './Route.ts';
 
 export interface RouteInterface {
   render: (route: RouteInterface, pathname: string) => void; // Исправлена сигнатура render
