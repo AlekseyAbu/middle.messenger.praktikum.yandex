@@ -66,5 +66,21 @@ describe('Router', () => {
     expect(mockRoute.render.calledOnce).to.be.true;
   });
 
+  it('Должен вызывать back/forward истории', () => {
+    router.back();
+    expect(window.history.back.calledOnce).to.be.true;
+
+    router.forward();
+    expect(window.history.forward.calledOnce).to.be.true;
+  });
+
+  it('Должен перейти на маршрут "*" если совпадений нет', () => {
+    const block = {} as any;
+    router.use('*', Block);
+    router.start();
+
+    router.go('/non-existent');
+    expect(router['currentRoute'].pathname).to.equal('*');
+  });
 
 });
