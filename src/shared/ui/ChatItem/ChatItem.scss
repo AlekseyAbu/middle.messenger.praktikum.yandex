@@ -6,12 +6,18 @@
     grid-template-columns: 47px auto 25px;
     border-top: 1px solid #EAEAEA;
     column-gap: 10px;
+    cursor: pointer;
+    transition: 300ms;
 
     &__avatar {
         width: 47px;
         height: 47px;
         border-radius: 50%;
         object-fit: cover;
+    }
+
+    &:hover {
+        opacity: .5;
     }
 }
 
@@ -31,7 +37,7 @@
         font-weight: 500;
         font-size: 12px;
         line-height: 15px;
-        color: #999999;
+        color: #999;
 
     }
 }
@@ -46,7 +52,7 @@
         font-size: 9px;
         line-height: 13px;
         text-align: right;
-        color: #999999;
+        color: #999;
     }
 
     &__notify {
@@ -59,7 +65,11 @@
         font-weight: 500;
         font-size: 11px;
         line-height: 12px;
-        color: #FFFFFF;
+        color: #FFF;
         background: #3369F3;
     }
+}
+
+.active {
+    background-color: #efefef;
 }

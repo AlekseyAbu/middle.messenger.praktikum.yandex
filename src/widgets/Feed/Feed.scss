@@ -3,6 +3,7 @@
     flex-direction: column;
     padding: 0 20px;
     width: 100%;
+    position: relative;
 
     &__header {
         width: 100%;
@@ -13,9 +14,10 @@
         &__btn {
             margin-left: auto;
             margin-right: 10px;
-            background-image: url("src/shared/assets/icon/kebab.png");
+            background-image: url("/kebab.png");
             width: 3px;
             height: 15px;
+            padding: 0;
         }
 
         &__name {
@@ -31,5 +33,6 @@
     &__content {
         margin-top: 10px;
         height: calc(100vh - 120px);
+        overflow-y: scroll;
     }
 }

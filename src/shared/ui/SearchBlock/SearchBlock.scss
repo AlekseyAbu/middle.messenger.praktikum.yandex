@@ -18,8 +18,8 @@
         font-size: 12px;
         line-height: 12px;
 
-        &:placeholder {
-            color: #999999;
+        &::placeholder {
+            color: #999;
         }
 
     }
