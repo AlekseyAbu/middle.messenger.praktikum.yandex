@@ -2,6 +2,7 @@ import { StoreEvents } from './store';
 import isEqual from '../utils/isEqual';
 
 export function connect(mapStateToProps: any) {
+  // eslint-disable-next-line func-names
   return function (Component: any) {
     return class extends Component {
       private onChangeStoreCallback: () => void;

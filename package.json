@@ -14,13 +14,9 @@
     "eslint:fix": "eslint \"**/*.{ts,js}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
-    "test": "mocha"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test lint:all",
-      "pre-push": "npm run other command"
-    }
+    "test": "mocha",
+    "lint:all": "npx stylelint \"**/*.scss\" && eslint \"**/*.{ts,js}\"",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/chai": "^5.2.2",
@@ -46,6 +42,7 @@
     "@types/xmlhttprequest": "^1.8.2",
     "handlebars": "^4.7.8",
     "nanoid": "^5.1.3",
+    "npm-run-all": "^4.1.5",
     "ts-node": "^10.9.2"
   }
 }
