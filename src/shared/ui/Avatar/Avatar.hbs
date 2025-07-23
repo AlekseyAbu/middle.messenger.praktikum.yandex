@@ -1,7 +1,5 @@
-<div class="avatar size__{{size}}">
-{{#if url}}
-  <img class="avatar__image" src="{{url}}" alt="avatar"/>
+{{#if src}}
+  <img class="avatar__image {{customClass}}" src="https://ya-praktikum.tech/api/v2/resources{{src}}" alt="avatar"/>
 {{else}}
-  <div class="avatar__default"></div>
+  <div class="avatar__default {{customClass}}"></div>
 {{/if}}
-</div>

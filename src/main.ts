@@ -1,17 +1,25 @@
-import './shared/style/index.scss'
-import './shared/style/reset.css'
-import navigate from './app'
+import './shared/style/index.scss';
+import './shared/style/reset.scss';
+import Router from '@/shared/core/Router.ts';
+import { ROUTER } from '@/shared/constants/constants.ts';
+import * as Pages from '@/pages';
+import { Store } from '@/shared/store/store.ts';
 
-
-document.addEventListener('DOMContentLoaded', () => navigate('list'));
-
-document.addEventListener('click', e => {
-    //@ts-ignore
-    const page = e.target.getAttribute('page');
-    if (page) {
-        navigate(page);
-
-        e.preventDefault();
-        e.stopImmediatePropagation();
-    }
+(window as any).store = new Store({
+  isLoading: false,
+  user: null,
+  loginError: null,
+  chats: null,
+  chat_id: null,
+  choice_chat: null,
 });
+
+const APP_ROOT_ELEMENT = '#app';
+(window as any).router = new Router(APP_ROOT_ELEMENT);
+(window as any).router
+  .use(ROUTER.login, Pages.LoginPage)
+  .use(ROUTER.auth, Pages.AuthPage)
+  .use(ROUTER.chats, Pages.Main)
+  .use(ROUTER.users, Pages.SettingPage)
+  .use('*', Pages.NotFoundPage)
+  .start();

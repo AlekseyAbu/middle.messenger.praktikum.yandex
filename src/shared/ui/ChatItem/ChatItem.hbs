@@ -1,13 +1,14 @@
-<li class="chat-item">
-  <img class="chat-item__avatar" src="{{url}}" alt="{{name}}"/>
+  <img class="chat-item__avatar" src="{{avatar}}" alt="{{title}}"/>
 
   <div class="about">
-    <span class="about__name">{{name}}</span>
+    <span class="about__name">{{title}}</span>
+  {{#if last_message}}
     <span class="about__text">{{text}}</span>
+  {{/if}}
   </div>
-
-  <div class="info">
-    <span class="info__time">{{time}}</span>
-    <span class="info__notify">{{count}}</span>
-  </div>
-</li>
+  {{#if last_message}}
+    <div class="info">
+      <span class="info__time">{{time}}</span>
+      <span class="info__notify">{{count}}</span>
+    </div>
+  {{/if}}

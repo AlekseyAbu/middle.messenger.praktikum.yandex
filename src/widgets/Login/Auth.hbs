@@ -1,0 +1,19 @@
+{{{InputLogin}}}
+{{{InputPassword}}}
+
+<div class="form__action">
+  {{{ButtonSighIn}}}
+  {{{ButtonNotAccount}}}
+</div>
+
+{{#if errorForm}}
+  <span class="form__error">
+    Неверно заполнена форма
+  </span>
+{{/if}}
+
+{{#if loginError}}
+  <span class="form__error">
+    {{loginError}}
+  </span>
+{{/if}}

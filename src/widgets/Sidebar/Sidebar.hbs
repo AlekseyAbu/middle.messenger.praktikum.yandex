@@ -1,15 +1,15 @@
-<div class="sidebar">
-  <button class="sidebar__btn">
-    Профиль
-    <img class="sidebar__btn__icon" src="src/shared/assets/icon/arrow.svg" alt="arrow-icon"/>
-  </button>
+<!--<button class="sidebar__btn">-->
+<!--  Профиль-->
+<!--  {{{Avatar}}}-->
+<!--&lt;!&ndash;  <img class="sidebar__btn__icon" src="src/shared/assets/icon/arrow.svg" alt="arrow-icon"/>&ndash;&gt;-->
+<!--</button>-->
 
-  {{> SearchBlock }}
+{{{ButtonProfile}}}
 
-  <ul>
-    {{> ChatItem url="https://lastfm.freetls.fastly.net/i/u/ar0/708e7517998748bac8a19f4a42635124.png" name="Андрей" text="Изображение" time="10:49" count="1"}}
-    {{> ChatItem url="https://lastfm.freetls.fastly.net/i/u/ar0/708e7517998748bac8a19f4a42635124.png" name="Андрей" text="Изображение" time="10:49" count="1"}}
-    {{> ChatItem url="https://lastfm.freetls.fastly.net/i/u/ar0/708e7517998748bac8a19f4a42635124.png" name="Андрей" text="Изображение" time="10:49" count="1"}}
-    {{> ChatItem url="https://lastfm.freetls.fastly.net/i/u/ar0/708e7517998748bac8a19f4a42635124.png" name="Андрей" text="Изображение" time="10:49" count="1"}}
-  </ul>
-</div>
+{{{SearchBlock}}}
+
+<ul>
+  {{#each ChatList}}
+    {{{ this }}}
+  {{/each}}
+</ul>
