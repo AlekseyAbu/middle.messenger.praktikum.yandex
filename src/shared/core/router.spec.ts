@@ -65,5 +65,4 @@ describe('Router', () => {
 
     expect(mockRoute.render.calledOnce).to.be.true;
   });
-
 });
